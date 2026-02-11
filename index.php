@@ -3,13 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PHP + MySQL</title>
+    <title>Главная страница</title>
 </head>
-<body id="site">
+<body class="site">
     <?php 
         include 'header.php';
     ?>
-    
     <div class="center">
         <h1>Утрипэ</h1>
         <div>
