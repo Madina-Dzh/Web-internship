@@ -11,14 +11,14 @@
         include 'header.php';
     ?>
     <div class="wrapper-auth">
-        <form id="auth"> 
-        <label for="ligin">Логин пользователя</label><br>
-        <input class="input-text" type="text" name="login" id="login" placeholder="Введите логин пользователя"/><br><br>
-        <label>Пароль пользователя</label><br>
-        <input class="input-text" type="password" name="password" id="password" placeholder="Введите пароль пользователя"/><br><br>
-        <input type="submit" value="Войти" name="btn-submit" id="btn-submit"/>
-        <a href="#">Регистрация</a>
-    </form>
+        <form id="auth" action="login.php" method="POST"> 
+            <label for="ligin">Логин пользователя</label><br>
+            <input class="input-text" type="text" name="login" id="login" placeholder="Введите логин пользователя"/><br><br>
+            <label>Пароль пользователя</label><br>
+            <input class="input-text" type="password" name="password" id="password" placeholder="Введите пароль пользователя"/><br><br>
+            <input type="submit" value="Войти" name="btn-submit" id="btn-submit"/>
+            <a href="#">Регистрация</a>
+        </form>
     </div>
     
 </body>
