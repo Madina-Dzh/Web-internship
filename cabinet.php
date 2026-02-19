@@ -22,12 +22,14 @@ $res = $mysql->query($query);
         </aside>
 
         <div class="wrapper-work">
-            <?php ; 
+            <div class="wrapper-table">
+                <?php ; 
                 echo "<table><tr><th>Номер</th><th>Студент</th><th>Группа</th></tr>";
                 while ($row = mysqli_fetch_array($res)) {
                     print("<tr><td>" . $row['Номер'] . "</td><td> " . $row['Студент'] ."</td><td> " . $row['Группа'] . "<br>");
                 }
-            ?>
+                ?>
+            </div>
         </div>
     </div>
     
