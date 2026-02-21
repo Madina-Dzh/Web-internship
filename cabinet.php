@@ -24,9 +24,9 @@ $res = $mysql->query($query);
         <div class="wrapper-work">
             <div class="wrapper-table">
                 <?php ; 
-                echo "<table><tr><th>Номер</th><th>Студент</th><th>Группа</th></tr>";
+                echo "<table><tr><th>№</th><th>Студент</th><th>Группа</th><th>Организация</th><th>Практика</th><th>Статус</th><th>Оценка</th><th>Преподаватель</th><th>Отчёт</th><th>Статус</th></tr>";
                 while ($row = mysqli_fetch_array($res)) {
-                    print("<tr><td>" . $row['Номер'] . "</td><td> " . $row['Студент'] ."</td><td> " . $row['Группа'] . "<br>");
+                    print("<tr><td>" . $row['Номер'] . "</td><td> " . $row['Студент'] ."</td><td> " . $row['Группа']  . "</td><td> " . $row['Организация']  . "</td><td> " . $row['Код_предмета']  . "</td><td> " . $row['Статус'] . "</th><td>". $row['Оценка'] . "</th><td>". $row['Преподаватель'] . "</th><td>". $row['Отчёт'] . "</th><td>". $row['Статус'] .  "<br>");
                 }
                 ?>
             </div>
