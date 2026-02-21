@@ -7,6 +7,26 @@
     margin-left: 50px;
 }
 
+.cabinet .wrapper-work h2 {
+    margin: 20px 50px;
+}
+
+.cabinet .wrapper-work .wrapper-filtres {
+    width: 490px;
+    display: inline-block;
+    margin-left: 50px;
+}
+
+.work-panel-for-table .button{
+    display: inline-block;
+    align-content: right;
+    
+}
+.work-panel-for-table button{
+    width: 150px;
+    height: 50px;
+}
+
 .cabinet aside {
     display: inline-block;
     position: fixed;
