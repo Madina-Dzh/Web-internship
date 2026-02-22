@@ -28,10 +28,13 @@
 .work-panel-for-table .button{
     display: inline-block;
     align-content: right;
+    position: relative;
+    top: 108px;
     
 }
 .work-panel-for-table button{
-    width: 150px;
+    width: 120px;
+    margin-left: 25px;
     height: 50px;
 }
 
