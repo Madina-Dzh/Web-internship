@@ -1,7 +1,7 @@
 <?php 
 
 /*
-1. название фильтра и поле разместить по разные стороны от родительского блока
++  название фильтра и поле разместить по разные стороны от родительского блока
 2. блок с кнопками выровнять с блоком с фильтрами
 3. Изменить стили, чтобы шапка таблицы оставалась видна при вертикальном скролинге
 */
@@ -38,26 +38,42 @@ $res = $mysql->query($query);
                 <div class="wrapper-filtres">
                     <h3>Фильтры</h3>
                     <div class="filtr">
-                        <span>По имени студента</span>
-                        <input type="text">
+                        <div class="left">
+                            <span>По имени студента</span>
+                        </div>
+                        <div class="right">
+                            <input type="text">
+                        </div>
                     </div>
                     <div class="filtr">
-                        <span>По имени преподавателя</span>
-                        <input type="text">
+                        <div class="left">
+                            <span>По имени преподавателя</span>
+                        </div>
+                        <div class="right">
+                            <input type="text">
+                        </div>
                     </div>
                     <div class="filtr">
-                        <span>По названию организации</span>
-                        <input type="text">
+                        <div class="left">
+                            <span>По названию организации</span>
+                        </div>
+                        <div class="right">
+                            <input type="text">
+                        </div>
                     </div>
                     <div class="filtr">
-                        <span>По коду практики</span>
-                        <input type="text">
+                        <div class="left">
+                            <span>По коду практики</span>
+                        </div>
+                        <div class="right">
+                            <input type="text">
+                        </div>
                     </div>
                 </div>
                 <div class="button">
                     <button>Поиск</button>
-                <Button>Изменить</Button>
-                <button>Удалить</button>
+                    <Button>Изменить</Button>
+                    <button>Удалить</button>
                 </div>
             </div>
             
