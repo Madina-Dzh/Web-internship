@@ -50,7 +50,7 @@
 
 .wrapper-table {
     height: 500px;
-    width: 1000px;
+    width: 1030px;
     margin: 20px;
     overflow-y: auto;
     overflow-x: auto;
@@ -87,6 +87,7 @@ table thead tr th:last-child {
 table tbody td {
 	text-align: left;
 	border: none;
+    max-width: 150px;
 	padding: 10px 15px;
 	font-size: 14px;
 	vertical-align: top;
