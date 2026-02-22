@@ -69,7 +69,15 @@ table thead th {
 	padding: 10px 15px;
 	background: #d8d8d8;
 	font-size: 14px;
+    
 }
+
+table th {
+    position: sticky;
+    top: 0;
+    background-color: #fff;
+}
+
 table thead tr th:first-child {
 	border-radius: 8px 0 0 8px;
 }

@@ -1,14 +1,4 @@
 <?php 
-
-/*
-+  название фильтра и поле разместить по разные стороны от родительского блока
-+  блок с кнопками выровнять с блоком с фильтрами
-3. Изменить стили, чтобы шапка таблицы оставалась видна при вертикальном скролинге
-*/
-
-
-
-
 $mysql = new mysqli("localhost", "root", "", "internship");
 $mysql->query("SET NAMES 'utf8'");
 $query = "SELECT I.internship_code AS Номер, S.FIO AS Студент, S.Shifr_gr AS Группа, O.title AS Организация, U.code AS Код_предмета, T.FIO AS Преподаватель, P.start_date AS Дата_начала, P.end_date AS Дата_окончания, I.assessment AS Оценка, I.internship_status AS Статус, I.note AS Заметки, I.report AS Отчёт FROM Internship I INNER JOIN Practice P ON P.practice_code = I.practice_code INNER JOIN Student S ON I.student_code = S.Nom_stud LEFT JOIN Organization O ON I.organization_code = O.organization_code INNER JOIN subjects_in_cycle U ON U.id = P.subject_code LEFT JOIN Teacher T ON P.teacher = T.Tab_nom;";
