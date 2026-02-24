@@ -10,6 +10,12 @@ $resInternship = $mysql->query($query);
 $query = "SELECT O.organization_code AS Номер, O.title AS Название, O.address AS Адрес, O.contact_person AS Контактное_лицо, O.phone_number AS Телефон, C.start_date AS Дата_начала, C.end_date AS Дата_конца, C.contract_code AS Контракт FROM Organization O LEFT JOIN Contract C ON C.organization_code = O.organization_code";
 $resOrganization = $mysql->query($query);
 
+// Образцовый отчёт
+$query = "SELECT S.Shifr_gr AS Группа, B.code AS Практика, Round(avg(I.assessment), 2) AS Средняя_успеваемость FROM Student S INNER JOIN Internship I ON S.Nom_stud = I.student_code INNER JOIN Practice P ON P.practice_code = I.practice_code INNER JOIN subjects_in_cycle B ON B.id = P.subject_code WHERE I.assessment IS NOT NULL AND I.assessment <> 0 GROUP BY S.Shifr_gr, B.code";
+
+// Выполняем запрос
+$exampleRep = $mysql->query($query);
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -24,7 +30,7 @@ $resOrganization = $mysql->query($query);
         include 'header.php';
     ?>
     <div class="cabinet">
-    <aside></aside>
+    <!-- <aside></aside>-->
 
     <div class="wrapper-work">
 
@@ -115,6 +121,30 @@ $resOrganization = $mysql->query($query);
             </div>
         </div>
         <!-- Конец раздела организаций -->
+
+        <hr><br>
+
+        <!-- Раздел отчётов -->
+        <div class="chapter">
+            <h2>Отчёты</h2>
+            <div class="work-panel-for-table">
+                <div class="wrapper-filtres">
+                </div>
+                
+                <div class="button">
+                </div>
+            </div>
+            
+            <div class="wrapper-table">
+                <?php 
+                echo "<table><tr><th>Группа</th><th>Практика</th><th>Средняя_успеваемость</th></tr>";
+                while ($row = mysqli_fetch_array($exampleRep)) {
+                    print("<tr><td>" . $row['Группа'] . "</td><td> " . $row['Практика'] ."</td><td> " . $row['Средняя_успеваемость']  . "</td></tr>");
+                }
+                echo "</table>";
+                ?>
+            </div>
+        </div>
     </div>
 </div>
 
