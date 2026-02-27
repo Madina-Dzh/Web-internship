@@ -102,3 +102,23 @@ table tbody tr td:last-child {
 	border-radius: 0 8px 8px 0;
 }
 
+.rep-table {
+    height: 400px;
+    width: 600px;
+    float: left;
+}
+
+.rep-table table {
+    height: 300px;
+    width: 100%;
+}
+
+#rep-chapter img {
+    float: right;
+    margin-top: 60px;
+    margin-right: 30px;
+}
+
+#rep-chapter h3 {
+    margin: 0px 70px;
+}

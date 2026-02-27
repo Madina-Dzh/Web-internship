@@ -125,28 +125,30 @@ $exampleRep = $mysql->query($query);
         <hr><br>
 
         <!-- Раздел отчётов -->
-        <div class="chapter">
+        <div class="chapter" id="rep-chapter">
             <h2>Отчёты</h2>
-            <div class="work-panel-for-table">
-                <div class="wrapper-filtres">
+            <div class="report">
+                <h3>Успеваемость групп по практикам</h3>
+                <div class="work-panel-for-table">
+                    <div class="wrapper-filtres">
+                    </div>
+                    
+                    <div class="button">
+                    </div>
                 </div>
                 
-                <div class="button">
+                <div class="wrapper-table rep-table">
+                    <?php 
+                    echo "<table><tr><th>Группа</th><th>Практика</th><th>Средняя_успеваемость</th></tr>";
+                    while ($row = mysqli_fetch_array($exampleRep)) {
+                        print("<tr><td>" . $row['Группа'] . "</td><td> " . $row['Практика'] ."</td><td> " . $row['Средняя_успеваемость']  . "</td></tr>");
+                    }
+                    echo "</table>";
+                    ?>
                 </div>
-            </div>
-            
-            <div class="wrapper-table">
-                <?php 
-                echo "<table><tr><th>Группа</th><th>Практика</th><th>Средняя_успеваемость</th></tr>";
-                while ($row = mysqli_fetch_array($exampleRep)) {
-                    print("<tr><td>" . $row['Группа'] . "</td><td> " . $row['Практика'] ."</td><td> " . $row['Средняя_успеваемость']  . "</td></tr>");
-                }
-                echo "</table>";
-                ?>
-            </div>
 
-            <img src="report.php"/>
-
+                <img src="report.php"/>
+            </div>
         </div>
     </div>
 </div>
