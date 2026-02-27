@@ -144,6 +144,9 @@ $exampleRep = $mysql->query($query);
                 echo "</table>";
                 ?>
             </div>
+
+            <img src="report.php"/>
+
         </div>
     </div>
 </div>
