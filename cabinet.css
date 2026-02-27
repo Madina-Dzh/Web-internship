@@ -103,22 +103,33 @@ table tbody tr td:last-child {
 }
 
 .rep-table {
-    height: 400px;
+    height: 300px;
     width: 600px;
     float: left;
+    border: black solid 2px;
+    margin: none;
+}
+
+.report .wrapper-table {
+    margin-top: 0%;
 }
 
 .rep-table table {
     height: 300px;
     width: 100%;
+    margin: none;
 }
 
-#rep-chapter img {
+.rep-table table thead th
+ {
+    margin: none;
+}
+#rep-chapter .right {
     float: right;
-    margin-top: 60px;
-    margin-right: 30px;
+    margin-right: 20px;
 }
 
 #rep-chapter h3 {
     margin: 0px 70px;
 }
+
