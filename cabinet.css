@@ -102,11 +102,20 @@ table tbody tr td:last-child {
 	border-radius: 0 8px 8px 0;
 }
 
+.report {
+    margin-bottom:  20px;
+}
+
+.report::after {
+    content: "";
+    display: block;
+    clear: both;
+}
+
 .rep-table {
     height: 300px;
     width: 600px;
     float: left;
-    border: black solid 2px;
     margin: none;
 }
 
@@ -121,7 +130,7 @@ table tbody tr td:last-child {
 }
 
 .rep-table table thead th
- {
+{
     margin: none;
 }
 #rep-chapter .right {
