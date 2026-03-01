@@ -158,7 +158,7 @@ $rep2 = $mysql->query($query);
                 <div>
                     <div class="wrapper-table rep-table">
                         <?php 
-                            echo "<table><tr><th>Организация</th><th>Кол-во студентов</th><th>Ср. оценка</th></tr>";
+                            echo "<table><tr><th>Организация</th><th>Кол-во студентов</th><th>Ср оценка</th></tr>";
                             while ($row = mysqli_fetch_array($rep2)) {
                                 print("<tr><td>" . $row['Организация'] . "</td><td> " . $row['Количество_студентов'] ."</td><td> " . $row['Средняя_оценка_практики']  . "</td></tr>");
                             }
@@ -166,7 +166,7 @@ $rep2 = $mysql->query($query);
                         ?>
                     </div>
                     <div class="right">
-                        <img src="report.php"/>
+                        <img src="rep2.php"/>
                     </div>
                 </div>
                 
