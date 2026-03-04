@@ -125,9 +125,11 @@ $practices = $mysql->query($query);
             
             <div class="wrapper-table">
                 <?php 
-                echo "<table><tr><th>№</th><th>Название</th><th>Адрес</th><th>Представитель</th><th>Телефон</th></tr>";
+                echo "<table><tr><th>№</th><th>Название</th><th>Адрес</th><th>Представитель</th><th>Телефон</th><th>Договор</th></tr>";
                 while ($row = mysqli_fetch_array($resOrganization)) {
-                    print("<tr><td>" . $row['Номер'] . "</td><td> " . $row['Название'] ."</td><td> " . $row['Адрес']  . "</td><td> " . $row['Контактное_лицо']  . "</td><td> " . $row['Телефон']  .  "</td></tr>");
+                    if ($row['Контракт'] != "") $tdContract = "Есть";
+                    else $tdContract = "Нет";
+                    print("<tr><td>" . $row['Номер'] . "</td><td> " . $row['Название'] ."</td><td> " . $row['Адрес']  . "</td><td> " . $row['Контактное_лицо']  . "</td><td> " . $row['Телефон']  . "</th><td>" . $tdContract .  "</td></tr>");
                 }
                 echo "</table>";
                 ?>
@@ -137,7 +139,7 @@ $practices = $mysql->query($query);
 
         <hr><br>
 
-        <!-- Раздел организаций -->
+        <!-- Раздел Практик -->
         <div class="chapter">
             <h2>практики</h2>
             <div class="work-panel-for-table">
@@ -174,7 +176,7 @@ $practices = $mysql->query($query);
                 ?>
             </div>
         </div>
-        <!-- Конец раздела организаций -->
+        <!-- Конец практик -->
 
         <hr><br>
 
