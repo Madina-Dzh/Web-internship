@@ -23,6 +23,7 @@
 
 .wrapper-work .wrapper-filtres .filtr .left {
     float: left;
+    width: 290px;
 }
 
 .wrapper-work .wrapper-filtres .filtr .right {
