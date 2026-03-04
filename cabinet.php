@@ -38,17 +38,23 @@ $practices = $mysql->query($query);
     <title>Личный кабинет</title>
     <link rel="stylesheet" href="./cabinet.css">
 </head>
-<body class="site">
+<body class="cab-site site">
     <?php 
         include 'header.php';
     ?>
     <div class="cabinet">
-    <!-- <aside></aside>-->
+    <aside>
+        <h2>Навигация</h2>
+        <a href="#internship">Ведомости</a>
+        <a href="#organization">Организации</a>
+        <a href="#practics">Практики</a>
+        <a href="#rep-chapter">Отчёты</a>
+    </aside>
 
     <div class="wrapper-work">
 
         <!-- Раздел ведомостей -->
-        <div class="chapter">
+        <div class="chapter" id="internship">
             <h2>Ведомости</h2>
             <div class="work-panel-for-table">
                 <div class="wrapper-filtres">
@@ -93,7 +99,7 @@ $practices = $mysql->query($query);
         <hr><br>
 
         <!-- Раздел организаций -->
-        <div class="chapter">
+        <div class="chapter" id="organization">
             <h2>Организации</h2>
             <div class="work-panel-for-table">
                 <div class="wrapper-filtres">
@@ -140,7 +146,7 @@ $practices = $mysql->query($query);
         <hr><br>
 
         <!-- Раздел Практик -->
-        <div class="chapter">
+        <div class="chapter" id="practics">
             <h2>Практики</h2>
             <div class="work-panel-for-table">
                 <div class="wrapper-filtres">

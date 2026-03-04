@@ -1,10 +1,28 @@
+.cab-site {
+    position: relative;
+}
+
+.cab-site aside {
+    position: absolute;
+    left: 20px;
+    padding-left: 20px;
+} 
+
+.cab-site aside a {
+    text-decoration: none;
+    display: block;
+    margin-bottom: 5px;
+    color: #000;
+}
+
 .cabinet .wrapper-work {
+    position: absolute;
     display: inline-block;
     background-color: #fff;
     width: 1070px;
     height: 5000px;
     margin-top: 30px;
-    margin-left: 50px;
+    left: 400px;
 }
 
 .cabinet .wrapper-work h2 {
