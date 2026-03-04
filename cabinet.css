@@ -17,6 +17,10 @@
     margin-left: 50px;
 }
 
+.wrapper-work .wrapper-filtres .filtr {
+    display: block;
+}
+
 .wrapper-work .wrapper-filtres .filtr .left {
     float: left;
 }
@@ -30,8 +34,8 @@
     align-content: right;
     position: relative;
     top: 108px;
-    
 }
+
 .work-panel-for-table button{
     width: 120px;
     margin-left: 25px;
@@ -49,16 +53,16 @@
 }
 
 .wrapper-table {
-    height: 500px;
+    max-height: 500px;
     width: 1030px;
-    margin: 20px;
+    margin-top: 50px;
+    margin-left: 20px;
     overflow-y: auto;
     overflow-x: auto;
 }
 
 table {
 	width: 100%;
-    height: 1000px;
 	border: none;
 	margin-bottom: 20px;
 }
@@ -84,6 +88,7 @@ table thead tr th:first-child {
 table thead tr th:last-child {
 	border-radius: 0 8px 8px 0;
 }
+
 table tbody td {
 	text-align: left;
 	border: none;
@@ -113,7 +118,7 @@ table tbody tr td:last-child {
 }
 
 .rep-table {
-    height: 300px;
+    max-height: 300px;
     width: 600px;
     float: left;
     margin: none;
@@ -124,7 +129,6 @@ table tbody tr td:last-child {
 }
 
 .rep-table table {
-    height: 300px;
     width: 100%;
     margin: none;
 }
