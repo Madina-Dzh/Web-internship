@@ -80,9 +80,9 @@ $practices = $mysql->query($query);
             
             <div class="wrapper-table">
                 <?php 
-                echo "<table><tr><th>№</th><th>Студент</th><th>Группа</th><th>Организация</th><th>Практика</th><th>Статус</th><th>Оценка</th><th>Преподаватель</th><th>Отчёт</th><th>Статус</th></tr>";
+                echo "<table><tr><th></th><th>№</th><th>Студент</th><th>Группа</th><th>Организация</th><th>Практика</th><th>Статус</th><th>Оценка</th><th>Преподаватель</th><th>Отчёт</th><th>Статус</th></tr>";
                 while ($row = mysqli_fetch_array($resInternship)) {
-                    print("<tr><td>" . $row['Номер'] . "</td><td> " . $row['Студент'] ."</td><td> " . $row['Группа']  . "</td><td> " . $row['Организация']  . "</td><td> " . $row['Код_предмета']  . "</td><td> " . $row['Статус'] . "</td><td>". $row['Оценка'] . "</td><td>". $row['Преподаватель'] . "</td><td>". $row['Отчёт'] . "</td><td>". $row['Статус'] .  "</td></tr>");
+                    print("<tr><td><input type='radio' name='groupInternship'/></td><td>" . $row['Номер'] . "</td><td> " . $row['Студент'] ."</td><td> " . $row['Группа']  . "</td><td> " . $row['Организация']  . "</td><td> " . $row['Код_предмета']  . "</td><td> " . $row['Статус'] . "</td><td>". $row['Оценка'] . "</td><td>". $row['Преподаватель'] . "</td><td>". $row['Отчёт'] . "</td><td>". $row['Статус'] .  "</td></tr>");
                 }
                 echo "</table>";
                 ?>
@@ -125,11 +125,11 @@ $practices = $mysql->query($query);
             
             <div class="wrapper-table">
                 <?php 
-                echo "<table><tr><th>№</th><th>Название</th><th>Адрес</th><th>Представитель</th><th>Телефон</th><th>Договор</th></tr>";
+                echo "<table><tr><th></th><th>№</th><th>Название</th><th>Адрес</th><th>Представитель</th><th>Телефон</th><th>Договор</th></tr>";
                 while ($row = mysqli_fetch_array($resOrganization)) {
                     if ($row['Контракт'] != "") $tdContract = "Есть";
                     else $tdContract = "Нет";
-                    print("<tr><td>" . $row['Номер'] . "</td><td> " . $row['Название'] ."</td><td> " . $row['Адрес']  . "</td><td> " . $row['Контактное_лицо']  . "</td><td> " . $row['Телефон']  . "</th><td>" . $tdContract .  "</td></tr>");
+                    print("<tr><td><input type='radio' name='groupOrg'></td><td>" . $row['Номер'] . "</td><td> " . $row['Название'] ."</td><td> " . $row['Адрес']  . "</td><td> " . $row['Контактное_лицо']  . "</td><td> " . $row['Телефон']  . "</th><td>" . $tdContract .  "</td></tr>");
                 }
                 echo "</table>";
                 ?>
@@ -141,7 +141,7 @@ $practices = $mysql->query($query);
 
         <!-- Раздел Практик -->
         <div class="chapter">
-            <h2>практики</h2>
+            <h2>Практики</h2>
             <div class="work-panel-for-table">
                 <div class="wrapper-filtres">
                     <h3>Фильтры</h3>
@@ -168,9 +168,9 @@ $practices = $mysql->query($query);
             
             <div class="wrapper-table">
                 <?php 
-                echo "<table><tr><th>№</th><th>Предмет</th><th>Начало</th><th>Конец</th><th>Преподаватель</th></tr>";
+                echo "<table><tr><th></th><th>№</th><th>Предмет</th><th>Начало</th><th>Конец</th><th>Преподаватель</th></tr>";
                 while ($row = mysqli_fetch_array($practices)) {
-                    print("<tr><td>" . $row['Номер'] . "</td><td> " . $row['Код_предмета'] ." - " . $row['Предмет'] . "</td><td> " . $row['Дата_начала']  . "</td><td> " . $row['Дата_конца']  . "</td><td> " . $row['Преподаватель']  .  "</td></tr>");
+                    print("<tr><td><input type='radio' name='groupPractic'/></td><td>" . $row['Номер'] . "</td><td> " . $row['Код_предмета'] ." - " . $row['Предмет'] . "</td><td> " . $row['Дата_начала']  . "</td><td> " . $row['Дата_конца']  . "</td><td> " . $row['Преподаватель']  .  "</td></tr>");
                 }
                 echo "</table>";
                 ?>
