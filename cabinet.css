@@ -11,6 +11,10 @@
     margin: 20px 50px;
 }
 
+.work-panel-for-table {
+    position: relative;
+}
+
 .cabinet .wrapper-work .wrapper-filtres {
     width: 490px;
     display: inline-block;
@@ -33,8 +37,8 @@
 .work-panel-for-table .button{
     display: inline-block;
     align-content: right;
-    position: relative;
-    top: 108px;
+    position: absolute;
+    bottom: 0;
 }
 
 .work-panel-for-table button{
