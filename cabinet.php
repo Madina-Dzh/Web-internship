@@ -24,6 +24,11 @@ GROUP BY Организация";
 
 $rep2 = $mysql->query($query);
 
+$query = "SELECT P.practice_code AS Номер, S.code AS Код_предмета, S.title AS Предмет, P.start_date AS Дата_начала, P.end_date AS Дата_конца, T.FIO AS Преподаватель
+FROM Practice P INNER JOIN Teacher T ON P.teacher = T.Tab_nom INNER JOIN subjects_in_cycle S ON S.id = P.subject_code";
+
+$practices = $mysql->query($query);
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -132,6 +137,47 @@ $rep2 = $mysql->query($query);
 
         <hr><br>
 
+        <!-- Раздел организаций -->
+        <div class="chapter">
+            <h2>практики</h2>
+            <div class="work-panel-for-table">
+                <div class="wrapper-filtres">
+                    <h3>Фильтры</h3>
+                    <div class="filtr">
+                        <div class="left"><span>По предмету</span></div>
+                        <div class="right"><input type="text"></div>
+                    </div>
+                    <div class="filtr">
+                        <div class="left"><span>По преподавателю</span></div>
+                        <div class="right"><input type="text"></div>
+                    </div>
+                    <div class="filtr">
+                        <div class="left"><span>По дате в периоде</span></div>
+                        <div class="right"><input type="text"></div>
+                    </div>
+                </div>
+                
+                <div class="button">
+                    <button>Поиск</button>
+                    <button>Изменить</button>
+                    <button>Удалить</button>
+                </div>
+            </div>
+            
+            <div class="wrapper-table">
+                <?php 
+                echo "<table><tr><th>№</th><th>Предмет</th><th>Начало</th><th>Конец</th><th>Преподаватель</th></tr>";
+                while ($row = mysqli_fetch_array($practices)) {
+                    print("<tr><td>" . $row['Номер'] . "</td><td> " . $row['Код_предмета'] ." - " . $row['Предмет'] . "</td><td> " . $row['Дата_начала']  . "</td><td> " . $row['Дата_конца']  . "</td><td> " . $row['Преподаватель']  .  "</td></tr>");
+                }
+                echo "</table>";
+                ?>
+            </div>
+        </div>
+        <!-- Конец раздела организаций -->
+
+        <hr><br>
+
         <!-- Раздел отчётов -->
         <div class="chapter" id="rep-chapter">
             <h2>Отчёты</h2>
@@ -148,7 +194,7 @@ $rep2 = $mysql->query($query);
                         ?>
                     </div>
                     <div class="right">
-                        <img src="report.php"/>
+                        <img src="rep1.php"/>
                     </div>
                 </div>
                 
