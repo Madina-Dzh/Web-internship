@@ -10,20 +10,6 @@ $resInternship = $mysql->query($query);
 $query = "SELECT O.organization_code AS Номер, O.title AS Название, O.address AS Адрес, O.contact_person AS Контактное_лицо, O.phone_number AS Телефон, C.start_date AS Дата_начала, C.end_date AS Дата_конца, C.contract_code AS Контракт FROM Organization O LEFT JOIN Contract C ON C.organization_code = O.organization_code";
 $resOrganization = $mysql->query($query);
 
-// Отчёт 1
-$query = "SELECT S.Shifr_gr AS Группа, B.code AS Практика, Round(avg(I.assessment), 2) AS Средняя_успеваемость FROM Student S INNER JOIN Internship I ON S.Nom_stud = I.student_code INNER JOIN Practice P ON P.practice_code = I.practice_code INNER JOIN subjects_in_cycle B ON B.id = P.subject_code WHERE I.assessment IS NOT NULL AND I.assessment <> 0 GROUP BY S.Shifr_gr, B.code";
-
-// Выполняем запрос
-$rep1 = $mysql->query($query);
-
-// Отчёт 2
-$query = "SELECT O.title AS Организация, Count(I.student_code) AS Количество_студентов, Round(avg(I.assessment), 2) AS Средняя_оценка_практики
-FROM Organization O INNER JOIN Internship I ON I.organization_code = O.organization_code
-WHERE assessment IS NOT NULL AND assessment <> 0
-GROUP BY Организация";
-
-$rep2 = $mysql->query($query);
-
 $query = "SELECT P.practice_code AS Номер, S.code AS Код_предмета, S.title AS Предмет, P.start_date AS Дата_начала, P.end_date AS Дата_конца, T.FIO AS Преподаватель
 FROM Practice P INNER JOIN Teacher T ON P.teacher = T.Tab_nom INNER JOIN subjects_in_cycle S ON S.id = P.subject_code";
 
@@ -48,7 +34,6 @@ $practices = $mysql->query($query);
         <a href="#internship">Ведомости</a>
         <a href="#organization">Организации</a>
         <a href="#practics">Практики</a>
-        <a href="#rep-chapter">Отчёты</a>
         <br>
         <a href="#top">Наверх</a>
     </aside>
@@ -187,47 +172,6 @@ $practices = $mysql->query($query);
         <!-- Конец практик -->
 
         <hr><br>
-
-        <!-- Раздел отчётов -->
-        <div class="chapter" id="rep-chapter">
-            <h2>Отчёты</h2>
-            <div class="report">
-                <h3>Успеваемость групп по практикам</h3>
-                <div>
-                    <div class="wrapper-table rep-table">
-                        <?php 
-                            echo "<table><tr><th>Группа</th><th>Практика</th><th>Средняя_успеваемость</th></tr>";
-                            while ($row = mysqli_fetch_array($rep1)) {
-                                print("<tr><td>" . $row['Группа'] . "</td><td> " . $row['Практика'] ."</td><td> " . $row['Средняя_успеваемость']  . "</td></tr>");
-                            }
-                            echo "</table>";
-                        ?>
-                    </div>
-                    <div class="right">
-                        <img src="rep1.php"/>
-                    </div>
-                </div>
-                
-            </div>
-            <div class="report">
-                <h3>Организации партнёры</h3>
-                <div>
-                    <div class="wrapper-table rep-table">
-                        <?php 
-                            echo "<table><tr><th>Организация</th><th>Кол-во студентов</th><th>Ср оценка</th></tr>";
-                            while ($row = mysqli_fetch_array($rep2)) {
-                                print("<tr><td>" . $row['Организация'] . "</td><td> " . $row['Количество_студентов'] ."</td><td> " . $row['Средняя_оценка_практики']  . "</td></tr>");
-                            }
-                            echo "</table>";
-                        ?>
-                    </div>
-                    <div class="right">
-                        <img src="rep2.php"/>
-                    </div>
-                </div>
-                
-            </div>
-        </div>
     </div>
 </div>
 
