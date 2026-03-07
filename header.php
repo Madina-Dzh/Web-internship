@@ -13,9 +13,7 @@ session_start();
     <div class="header">
         <a class="element-head" href="./index.php">&#183; Главная</a>
         <a class="element-head" href="#">&#183; О нас</a>
-        <a class="element-head" href="#">&#183; Новости / Объявления</a>
-        <a class="element-head" href="#">&#183; Faq / Помощь</a>
-        <a class="element-head" href="#">&#183; Контакты</a>
+        <a class="element-head" href="#">&#183; Справочники</a>
         <a class="element-head" href="./cabinet.php">&#183; Личный кабинет</a>
         <?php
             if (empty($_SESSION)) {

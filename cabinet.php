@@ -49,6 +49,8 @@ $practices = $mysql->query($query);
         <a href="#organization">Организации</a>
         <a href="#practics">Практики</a>
         <a href="#rep-chapter">Отчёты</a>
+        <br>
+        <a href="#top">Наверх</a>
     </aside>
 
     <div class="wrapper-work">
