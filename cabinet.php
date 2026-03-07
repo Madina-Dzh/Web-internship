@@ -72,7 +72,7 @@ $practices = $mysql->query($query);
                 <?php 
                 echo "<table><tr><th></th><th>№</th><th>Организация</th><th>Начало</th><th>Конец</th></tr>";
                 while ($row = mysqli_fetch_array($resContract)) {
-                    print("<tr><td><input type='radio' name='groupContract'></td><td>" . $row['Номер'] . "</td><td> " . $row['Организация'] ."</td><td> " . $row['Дата_начала']  . "</td><td> " . $row['Дата_конца']  . "</td></tr>");
+                    print("<tr><td><input type='radio' name='groupContract'></td><td>" . $row['Номер'] . "</td><td> " . $row['Организация'] ."</td><td> " . date('d.m.Y', strtotime($row['Дата_начала']))  . "</td><td> " . date('d.m.Y', strtotime($row['Дата_конца']))  . "</td></tr>");
                 }
                 echo "</table>";
                 ?>
@@ -158,7 +158,7 @@ $practices = $mysql->query($query);
                 <?php 
                 echo "<table><tr><th></th><th>№</th><th>Предмет</th><th>Начало</th><th>Конец</th><th>Преподаватель</th></tr>";
                 while ($row = mysqli_fetch_array($practices)) {
-                    print("<tr><td><input type='radio' name='groupPractic'/></td><td>" . $row['Номер'] . "</td><td> " . $row['Код_предмета'] ." - " . $row['Предмет'] . "</td><td> " . $row['Дата_начала']  . "</td><td> " . $row['Дата_конца']  . "</td><td> " . $row['Преподаватель']  .  "</td></tr>");
+                    print("<tr><td><input type='radio' name='groupPractic'/></td><td>" . $row['Номер'] . "</td><td> " . $row['Код_предмета'] ." - " . $row['Предмет'] . "</td><td> " . date('d.m.Y', strtotime($row['Дата_начала']))  . "</td><td> " . date('d.m.Y', strtotime($row['Дата_конца']))  . "</td><td> " . $row['Преподаватель']  .  "</td></tr>");
                 }
                 echo "</table>";
                 ?>
