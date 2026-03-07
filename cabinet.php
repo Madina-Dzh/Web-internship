@@ -2,6 +2,12 @@
 $mysql = new mysqli("localhost", "root", "", "internship");
 $mysql->query("SET NAMES 'utf8'");
 
+// Договора
+$query = "SELECT C.contract_code AS Номер, O.title AS Организация, C.start_date AS Дата_начала, C.end_date AS Дата_конца
+FROM Organization O INNER JOIN Contract C ON C.organization_code = O.organization_code";
+
+$resContract = $mysql->query($query);
+
 // Организации
 $query = "SELECT O.organization_code AS Номер, O.title AS Название, O.address AS Адрес, O.contact_person AS Контактное_лицо, O.phone_number AS Телефон, C.start_date AS Дата_начала, C.end_date AS Дата_конца, C.contract_code AS Контракт FROM Organization O LEFT JOIN Contract C ON C.organization_code = O.organization_code";
 $resOrganization = $mysql->query($query);
@@ -34,6 +40,46 @@ $practices = $mysql->query($query);
     </aside>
 
     <div class="wrapper-work">
+
+        <!-- Раздел Договоров -->
+        <div class="chapter" id="organization">
+            <h2>Договора</h2>
+            <div class="work-panel-for-table">
+                <div class="wrapper-filtres">
+                    <h3>Фильтры</h3>
+                    <div class="filtr">
+                        <div class="left"><span>По номеру</span></div>
+                        <div class="right"><input type="text"></div>
+                    </div>
+                    <div class="filtr">
+                        <div class="left"><span>По организации</span></div>
+                        <div class="right"><input type="text"></div>
+                    </div>
+                    <div class="filtr">
+                        <div class="left"><span>По статусу</span></div>
+                        <div class="right"><input type="text"></div>
+                    </div>
+                </div>
+                
+                <div class="button">
+                    <button>Поиск</button>
+                    <button>Добавить</button>
+                    <button>Изменить</button>
+                </div>
+            </div>
+            
+            <div class="wrapper-table">
+                <?php 
+                echo "<table><tr><th></th><th>№</th><th>Организация</th><th>Начало</th><th>Конец</th></tr>";
+                while ($row = mysqli_fetch_array($resContract)) {
+                    print("<tr><td><input type='radio' name='groupContract'></td><td>" . $row['Номер'] . "</td><td> " . $row['Организация'] ."</td><td> " . $row['Дата_начала']  . "</td><td> " . $row['Дата_конца']  . "</td></tr>");
+                }
+                echo "</table>";
+                ?>
+            </div>
+        </div>
+        <!-- Конец раздела организаций -->
+
         <!-- Раздел организаций -->
         <div class="chapter" id="organization">
             <h2>Организации</h2>
