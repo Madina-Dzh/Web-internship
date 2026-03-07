@@ -2,6 +2,12 @@
 $mysql = new mysqli("localhost", "root", "", "internship");
 $mysql->query("SET NAMES 'utf8'");
 
+// Активные договора
+$query = "SELECT C.contract_code AS Номер, O.title AS Организация
+FROM Organization O INNER JOIN Contract C ON C.organization_code = O.organization_code
+WHERE Date(C.end_date) > CURDATE()";
+$activeContract = $mysql->query($query);
+
 // Договора
 $query = "SELECT C.contract_code AS Номер, O.title AS Организация, C.start_date AS Дата_начала, C.end_date AS Дата_конца
 FROM Organization O INNER JOIN Contract C ON C.organization_code = O.organization_code";
@@ -79,6 +85,17 @@ $practices = $mysql->query($query);
             </div>
         </div>
         <!-- Конец раздела организаций -->
+
+        <div class="chapter">
+            Выберите организацию:
+            <select>
+                <?php 
+                    while ($row = mysqli_fetch_array($activeContract)) {
+                        print("<option value='" . $row['Номер'] . "'>" . $row['Организация'] . "</option>");
+                    }
+                ?>
+            </select>
+        </div>
 
         <!-- Раздел организаций -->
         <div class="chapter" id="organization">
