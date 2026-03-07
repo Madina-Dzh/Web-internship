@@ -43,3 +43,8 @@
     color: rgb(108, 96, 188);
     text-decoration: none;
 }
+
+#auth .error {
+    color: red;
+    font-size: 16px;
+}

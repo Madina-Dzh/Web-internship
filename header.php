@@ -16,8 +16,8 @@ session_start();
         <a class="element-head" href="#">&#183; Справочники</a>
         <a class="element-head" href="./cabinet.php">&#183; Личный кабинет</a>
         <?php
-            if (empty($_SESSION)) {
-                echo '<a class="element-head" href="./authentication.php">&#183; Вход / Регистрация</a>';
+            if (empty($_SESSION['login'])) {
+                echo '<a class="element-head" href="./authentication.php">&#183; Вход </a>';
             } else {
                 echo '<a class="element-head" href="logout.php" onclick="return confirm(`Вы уверены, что хотите выполнить это действие?`);">&#183; Выход</a>';
                 echo "<br><a class='element-head'>{$_SESSION['login']}</a>";

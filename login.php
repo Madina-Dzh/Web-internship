@@ -19,6 +19,8 @@ if (!empty($_POST['password']) and !empty($_POST['login'])) {
         // неверный логин или пароль  
         echo "Вход провален!<br>";
         echo  $query;
+        header("Location: http://localhost/test/authentication.php");
+        $_SESSION['error'] = "Неверный логин или пороль";
     }  
 }  
 $mysql->close();

@@ -15,9 +15,9 @@
             <label for="ligin">Логин пользователя</label><br>
             <input class="input-text" type="text" name="login" id="login" placeholder="Введите логин пользователя"/><br><br>
             <label>Пароль пользователя</label><br>
-            <input class="input-text" type="password" name="password" id="password" placeholder="Введите пароль пользователя"/><br><br>
+            <input class="input-text" type="password" name="password" id="password" placeholder="Введите пароль пользователя"/>
+            <?php if(!empty($_SESSION['error'])) echo '<div class="error">' . $_SESSION['error'] . '</div><br>'; else echo '<br><br>' ?>
             <input type="submit" value="Войти" name="btn-submit" id="btn-submit"/>
-            <a href="#">Регистрация</a>
         </form>
     </div>
     
