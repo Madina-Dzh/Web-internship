@@ -2,10 +2,6 @@
 $mysql = new mysqli("localhost", "root", "", "internship");
 $mysql->query("SET NAMES 'utf8'");
 
-// Ведомости
-$query = "SELECT I.internship_code AS Номер, S.FIO AS Студент, S.Shifr_gr AS Группа, O.title AS Организация, U.code AS Код_предмета, T.FIO AS Преподаватель, P.start_date AS Дата_начала, P.end_date AS Дата_окончания, I.assessment AS Оценка, I.internship_status AS Статус, I.note AS Заметки, I.report AS Отчёт FROM Internship I INNER JOIN Practice P ON P.practice_code = I.practice_code INNER JOIN Student S ON I.student_code = S.Nom_stud LEFT JOIN Organization O ON I.organization_code = O.organization_code INNER JOIN subjects_in_cycle U ON U.id = P.subject_code LEFT JOIN Teacher T ON P.teacher = T.Tab_nom;";
-$resInternship = $mysql->query($query);  
-
 // Организации
 $query = "SELECT O.organization_code AS Номер, O.title AS Название, O.address AS Адрес, O.contact_person AS Контактное_лицо, O.phone_number AS Телефон, C.start_date AS Дата_начала, C.end_date AS Дата_конца, C.contract_code AS Контракт FROM Organization O LEFT JOIN Contract C ON C.organization_code = O.organization_code";
 $resOrganization = $mysql->query($query);
@@ -31,7 +27,6 @@ $practices = $mysql->query($query);
     <div class="cabinet">
     <aside>
         <h2>Навигация</h2>
-        <a href="#internship">Ведомости</a>
         <a href="#organization">Организации</a>
         <a href="#practics">Практики</a>
         <br>
@@ -39,52 +34,6 @@ $practices = $mysql->query($query);
     </aside>
 
     <div class="wrapper-work">
-
-        <!-- Раздел ведомостей -->
-        <div class="chapter" id="internship">
-            <h2>Ведомости</h2>
-            <div class="work-panel-for-table">
-                <div class="wrapper-filtres">
-                    <h3>Фильтры</h3>
-                    <div class="filtr">
-                        <div class="left"><span>По имени студента</span></div>
-                        <div class="right"><input type="text"></div>
-                    </div>
-                    <div class="filtr">
-                        <div class="left"><span>По имени преподавателя</span></div>
-                        <div class="right"><input type="text"></div>
-                    </div>
-                    <div class="filtr">
-                        <div class="left"><span>По названию организации</span></div>
-                        <div class="right"><input type="text"></div>
-                    </div>
-                    <div class="filtr">
-                        <div class="left"><span>По коду практики</span></div>
-                        <div class="right"><input type="text"></div>
-                    </div>
-                </div>
-                
-                <div class="button">
-                    <button>Поиск</button>
-                    <button>Изменить</button>
-                    <button>Удалить</button>
-                </div>
-            </div>
-            
-            <div class="wrapper-table">
-                <?php 
-                echo "<table><tr><th></th><th>№</th><th>Студент</th><th>Группа</th><th>Организация</th><th>Практика</th><th>Статус</th><th>Оценка</th><th>Преподаватель</th><th>Отчёт</th><th>Статус</th></tr>";
-                while ($row = mysqli_fetch_array($resInternship)) {
-                    print("<tr><td><input type='radio' name='groupInternship'/></td><td>" . $row['Номер'] . "</td><td> " . $row['Студент'] ."</td><td> " . $row['Группа']  . "</td><td> " . $row['Организация']  . "</td><td> " . $row['Код_предмета']  . "</td><td> " . $row['Статус'] . "</td><td>". $row['Оценка'] . "</td><td>". $row['Преподаватель'] . "</td><td>". $row['Отчёт'] . "</td><td>". $row['Статус'] .  "</td></tr>");
-                }
-                echo "</table>";
-                ?>
-            </div>
-        </div>
-        <!-- Конец раздела ведомостей -->
-        
-        <hr><br>
-
         <!-- Раздел организаций -->
         <div class="chapter" id="organization">
             <h2>Организации</h2>
