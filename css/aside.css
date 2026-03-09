@@ -1,14 +1,9 @@
-aside {
-    
-    width: 200px;
-}
-
 .sidebar {
   width: 250px;
   padding: 1rem;
   background: #f8f9fa;
   border-right: 1px solid #dee2e6;
-  height: 90vh;
+  height: 100vh;
 }
 
 .nav-list {
