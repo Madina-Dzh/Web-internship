@@ -8,6 +8,7 @@
 <body class="site">
     <?php 
         include 'includes/header.php';
+        include 'includes/aside.php';
     ?>
 </body>
 </html>
