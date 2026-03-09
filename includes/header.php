@@ -10,6 +10,20 @@ session_start();
     <link  rel="stylesheet" href="./css/header.css">
 </head>
 <body>
-    s
+    <header>
+        <div id="logo">
+            ПрактДог
+        </div>
+        <div id="a-header">
+            <a href="#">Практики</a>
+            &emsp;
+            <a href="#">Договоры</a>
+            &emsp;
+            <a href="#">Справочники</a>
+        </div>
+        <div id="account">
+            Войти
+        </div>
+    </header>
 </body>
 </html>

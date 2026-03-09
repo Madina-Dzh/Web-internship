@@ -1,0 +1,25 @@
+header {
+    height: 25px;
+    min-width: 400px;
+}
+
+header div {
+    display: inline-block;
+    justify-content: space-between;
+    vertical-align: middle;
+    text-align: center;
+}
+
+#logo {
+    width: 15%;  
+    float: left;  
+}
+
+#account {
+    width: 15%;
+    float: right; 
+}
+
+#a-header {
+    width: 70%;  
+}
