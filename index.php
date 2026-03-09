@@ -12,7 +12,10 @@
     <div class="center">
         <h1>Утрипэ</h1>
         <div>
-            <button>НАЧАТЬ</button>
+            <?php 
+            if (!empty($_SESSION['login'])) echo '<button><a href="./cabinet.php">НАЧАТЬ</a></button>';
+            else echo '<button><a href="./authentication.php">НАЧАТЬ</a></button>';
+            ?>
         </div>
         
         <div class="discription">

@@ -1,3 +1,8 @@
+a {
+    text-decoration: none;
+    color: #fff;
+}
+
 .header {
     background-color: rgba(205, 32, 32, 0.832);
     height: 70px;
