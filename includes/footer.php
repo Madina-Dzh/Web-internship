@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Footer</title>
+    <link rel="stylesheet" href="./css/footer.css">
+</head>
+<body>
+    <footer class="main-footer">
+    <div class="footer-container">
+        <div class="footer-section">
+            <h3 class="footer-title">О разработчике</h3>
+            <p class="footer-text">Студент факультета среднего профессионального образования</p>
+            <p class="footer-text">Орский гуманитарно‑технологический институт</p>
+        </div>
+
+        <div class="footer-section">
+            <h3 class="footer-title">Контакты</h3>
+            <div class="contact-item">
+                <span class="contact-icon">📞</span>
+                <a href="tel:+79225522682" class="contact-link">+7 (922) 552-26-82</a>
+            </div>
+            <div class="contact-item">
+                <span class="contact-icon">✉️</span>
+                <a href="mailto:developer@example.com" class="contact-link">developer@example.com</a>
+            </div>
+        </div>
+
+        <div class="footer-section">
+            <h3 class="footer-title">Профиль разработчика</h3>
+            <div class="contact-item">
+                <span class="contact-icon">💻</span>
+                <a href="https://github.com/Madina-Dzh" class="contact-link github-link" target="_blank">GitHub: Madina-Dzh</a>
+            </div>
+        </div>
+
+        <div class="footer-section footer-copyright">
+            <p class="footer-text">&copy; 2024 ПрактДог. Все права защищены.</p>
+            <p class="footer-text">Система договорных практик для методистов</p>
+        </div>
+    </div>
+</footer>
+</body>
+</html>
