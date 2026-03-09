@@ -1,25 +1,63 @@
-header {
-    height: 25px;
-    min-width: 400px;
-}
-
-header div {
-    display: inline-block;
+.main-header {
+    display: flex;
     justify-content: space-between;
-    vertical-align: middle;
-    text-align: center;
+    align-items: center;
+    height: 60px;
+    min-width: 400px;
+    padding: 0 20px;
+    background: linear-gradient(135deg, #007bff 0%, #0056b3 100%);
+    color: white;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
 
-#logo {
-    width: 15%;  
-    float: left;  
+.logo {
+    flex: 0 0 auto;
 }
 
-#account {
-    width: 15%;
-    float: right; 
+.logo-text {
+    font-size: 1.5rem;
+    font-weight: bold;
+    letter-spacing: 1px;
 }
 
-#a-header {
-    width: 70%;  
+.main-nav {
+    flex: 1 1 auto;
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+}
+
+.nav-link {
+    color: white;
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 1rem;
+    padding: 8px 16px;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+}
+
+.nav-link:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: translateY(-2px);
+}
+
+.account {
+    flex: 0 0 auto;
+}
+
+.login-btn {
+    background: rgba(255, 255, 255, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    color: white;
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.login-btn:hover {
+    background: rgba(255, 255, 255, 0.3);
+    transform: scale(1.05);
 }

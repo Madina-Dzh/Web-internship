@@ -2,27 +2,25 @@
 session_start();
 ?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Шапка</title>
-    <link  rel="stylesheet" href="./css/header.css">
+    <title>ПрактДог — Система договорных практик</title>
+    <link rel="stylesheet" href="./css/header.css">
 </head>
 <body>
-    <header>
-        <div id="logo">
-            ПрактДог
+    <header class="main-header">
+        <div class="logo">
+            <span class="logo-text">ПрактДог</span>
         </div>
-        <div id="a-header">
-            <a href="#">Практики</a>
-            &emsp;
-            <a href="#">Договоры</a>
-            &emsp;
-            <a href="#">Справочники</a>
-        </div>
-        <div id="account">
-            Войти
+        <nav class="main-nav">
+            <a href="#" class="nav-link">Практики</a>
+            <a href="#" class="nav-link">Договоры</a>
+            <a href="#" class="nav-link">Справочники</a>
+        </nav>
+        <div class="account">
+            <button class="login-btn">Войти</button>
         </div>
     </header>
 </body>
