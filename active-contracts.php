@@ -1,3 +1,14 @@
+<?php 
+    $mysql = new mysqli("localhost", "root", "", "internship");
+    $mysql->query("SET NAMES 'utf8'");
+
+    $query = "SELECT C.contract_code AS Номер, O.title AS Организация, C.start_date AS Дата_начала, C.end_date AS Дата_конца
+    FROM Organization O INNER JOIN Contract C ON C.organization_code = O.organization_code
+    WHERE Date(C.end_date) > CURDATE()";
+
+    $activeContract = $mysql->query($query);
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -22,92 +33,22 @@
 
             <!-- Таблица договоров -->
             <div class="table-wrapper">
-                <table class="contracts-table">
-                    <thead>
-                        <tr>
+                <?php
+                    echo "<table class='contracts-table'><thead><tr>
+                            <th class='radio'></th>
                             <th>Номер</th>
                             <th>Организация</th>
                             <th>Дата начала</th>
                             <th>Дата конца</th>
-                            <th>Статус</th>
                             <th>Действия</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>001</td>
-                            <td>ООО «ТехноСервис»</td>
-                            <td>15.03.2024</td>
-                            <td>15.03.2025</td>
-                            <td class="status active">Действует</td>
-                            <td><button class="details-btn" onclick="goToDetails('001')">Детали</button></td>
-                        </tr>
-                        <tr>
-                            <td>002</td>
-                            <td>АО «ПромСтрой»</td>
-                            <td>20.01.2024</td>
-                            <td>20.01.2026</td>
-                            <td class="status active">Действует</td>
-                            <td><button class="details-btn" onclick="goToDetails('002')">Детали</button></td>
-                        </tr>
-                        <tr>
-                            <td>003</td>
-                            <td>ИП Иванов А.С.</td>
-                            <td>10.02.2023</td>
-                            <td>10.02.2024</td>
-                            <td class="status expired">Не действует</td>
-                            <td><button class="details-btn" onclick="goToDetails('003')">Детали</button></td>
-                        </tr>
-                        <tr>
-                            <td>004</td>
-                            <td>ЗАО «МегаПроект»</td>
-                            <td>05.05.2024</td>
-                            <td>05.05.2027</td>
-                            <td class="status active">Действует</td>
-                            <td><button class="details-btn" onclick="goToDetails('004')">Детали</button></td>
-                        </tr>
-                        <tr>
-                            <td>005</td>
-                            <td>ООО «СтройГарант»</td>
-                            <td>12.04.2023</td>
-                            <td>12.04.2024</td>
-                            <td class="status expired">Не действует</td>
-                            <td><button class="details-btn" onclick="goToDetails('005')">Детали</button></td>
-                        </tr>
-                        <tr>
-                            <td>006</td>
-                            <td>ПАО «ЭнергоРесурс»</td>
-                            <td>30.06.2024</td>
-                            <td>30.06.2025</td>
-                            <td class="status active">Действует</td>
-                            <td><button class="details-btn" onclick="goToDetails('006')">Детали</button></td>
-                        </tr>
-                        <tr>
-                            <td>007</td>
-                            <td>ООО «Новые Технологии»</td>
-                            <td>18.07.2024</td>
-                            <td>18.07.2026</td>
-                            <td class="status active">Действует</td>
-                            <td><button class="details-btn" onclick="goToDetails('007')">Детали</button></td>
-                        </tr>
-                        <tr>
-                            <td>008</td>
-                            <td>ИП Сидоров В.П.</td>
-                            <td>25.08.2023</td>
-                            <td>25.08.2024</td>
-                            <td class="status expired">Не действует</td>
-                            <td><button class="details-btn" onclick="goToDetails('008')">Детали</button></td>
-                        </tr>
-                        <tr>
-                            <td>009</td>
-                            <td>АО «Финансовый Центр»</td>
-                            <td>01.09.2024</td>
-                            <td>01.09.2025</td>
-                            <td class="status active">Действует</td>
-                            <td><button class="details-btn" onclick="goToDetails('009')">Детали</button></td>
-                        </tr>
-                    </tbody>
-                </table>
+                        </tr></thead>";
+                    while ($row = mysqli_fetch_array($activeContract)) {
+                        print("<tr><td class='radio'><input type='radio' name='groupContract'></td><td>" . $row['Номер'] . "</td><td> " . $row['Организация'] ."</td><td> " . date('d.m.Y', strtotime($row['Дата_начала']))  . "</td><td> " . date('d.m.Y', strtotime($row['Дата_конца']))  . "</td>
+                            <td><button class='details-btn' onclick='goToDetails('001')'>Детали</button></td>");
+                    }
+                    echo "</table>"
+                ?>
+                
             </div>
 
             <!-- Футер таблицы с кнопками и счётчиком -->

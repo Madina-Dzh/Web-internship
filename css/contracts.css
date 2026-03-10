@@ -70,6 +70,10 @@ body {
     border-bottom: 1px solid #eee;
 }
 
+.radio {
+    width: 4%;
+}
+
 .contracts-table th {
     background: #f8f9fa;
     font-weight: 600;
