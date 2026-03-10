@@ -16,7 +16,7 @@ session_start();
         </div>
         <nav class="main-nav">
             <a href="#" class="nav-link">Практики</a>
-            <a href="#" class="nav-link">Договоры</a>
+            <a href="./active-contracts.php" class="nav-link">Договоры</a>
             <a href="#" class="nav-link">Справочники</a>
         </nav>
         <div class="account">

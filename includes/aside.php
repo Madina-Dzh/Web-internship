@@ -11,7 +11,7 @@
   <nav class="sidebar-nav">
     <ul class="nav-list">
       <li>
-        <a href="#dashboard" class="nav-link">Дашборд</a>
+        <a href="./index.php" class="nav-link">Дашборд</a>
       </li>
 
       <li>
@@ -29,7 +29,7 @@
         <details open>
           <summary class="nav-link nav-link--parent">Договоры</summary>
           <ul class="submenu">
-            <li><a href="#active-contracts" class="submenu-link">Активные</a></li>
+            <li><a href="./active-contracts.php" class="submenu-link">Активные</a></li>
             <li><a href="#expired-contracts" class="submenu-link">Истекшие</a></li>
             <li><a href="#draft-contracts" class="submenu-link">Черновики</a></li>
           </ul>

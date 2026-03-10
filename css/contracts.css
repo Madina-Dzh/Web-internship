@@ -1,0 +1,171 @@
+body {
+    margin: 0px;
+}
+
+.container {
+    display: flex;
+    min-height: 100vh;
+    flex-direction: row;
+}
+
+.main-wrapper {
+    flex: 1;
+    padding: 20px;
+    background: #f5f7fa;
+}
+
+
+.tabs {
+    display: flex;
+    margin-bottom: 20px;
+    border-bottom: 1px solid #ddd;
+}
+
+.tab {
+    padding: 12px 24px;
+    text-decoration: none;
+    color: #666;
+    background: #f8f9fa;
+    border: 1px solid #ddd;
+    border-bottom: none;
+    margin-right: -1px;
+    transition: all 0.3s ease;
+}
+
+.tab:hover {
+    background: #e9ecef;
+    color: #333;
+}
+
+.tab.active {
+    background: white;
+    color: #007bff;
+    border-bottom: 3px solid #007bff;
+    font-weight: bold;
+}
+
+.table-wrapper {
+    height: 450px;
+    overflow-y: auto;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.contracts-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.contracts-table thead {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    background: white;
+}
+
+.contracts-table th,
+.contracts-table td {
+    padding: 12px 15px;
+    text-align: left;
+    border-bottom: 1px solid #eee;
+}
+
+.contracts-table th {
+    background: #f8f9fa;
+    font-weight: 600;
+    color: #495057;
+}
+
+.status {
+    font-weight: bold;
+}
+
+.status.active {
+    color: #28a745;
+}
+
+.status.expired {
+    color: #dc3545;
+}
+
+.details-btn {
+    background: #007bff;
+    color: white;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.details-btn:hover {
+    background: #0056b3;
+}
+
+.table-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 20px;
+    padding: 15px 0;
+}
+
+.actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    justify-content: flex-start;
+}
+
+.action-btn {
+    padding: 12px 24px;
+    border: none;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.action-btn:hover {
+    background: #f8f9fa;
+}
+
+.btn {
+    padding: 12px 24px;
+    border: none;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.add {
+    background: #4CAF50;
+    color: white;
+}
+
+.add:hover {
+    background: #45a049;
+}
+
+.delete {
+    background: #2196F3;
+    color: white;
+}
+
+.delete:hover {
+    background: #1976D2;
+}
+
+.edit {
+    background: transparent;
+    color: #2196F3;
+    border: 1px solid #2196F3;
+}
+
+.edit:hover {
+    background: #E3F2FD;
+}
+
