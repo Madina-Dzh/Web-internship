@@ -30,7 +30,7 @@
           <summary class="nav-link nav-link--parent">Договоры</summary>
           <ul class="submenu">
             <li><a href="./active-contracts.php" class="submenu-link">Активные</a></li>
-            <li><a href="#expired-contracts" class="submenu-link">Истекшие</a></li>
+            <li><a href="./expired-contracts.php" class="submenu-link">Истекшие</a></li>
             <li><a href="#draft-contracts" class="submenu-link">Черновики</a></li>
           </ul>
         </details>
