@@ -15,9 +15,9 @@ session_start();
             <span class="logo-text">ПрактДог</span>
         </div>
         <nav class="main-nav">
-            <a href="#" class="nav-link">Практики</a>
+            <a href="./active-practices.php" class="nav-link">Практики</a>
             <a href="./active-contracts.php" class="nav-link">Договоры</a>
-            <a href="#" class="nav-link">Справочники</a>
+            <a href="./organizations.php" class="nav-link">Справочники</a>
         </nav>
         <div class="account">
             <button class="login-btn">Войти</button>

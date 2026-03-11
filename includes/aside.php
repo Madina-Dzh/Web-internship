@@ -40,7 +40,7 @@
         <details open>
           <summary class="nav-link nav-link--parent">Справочники</summary>
           <ul class="submenu">
-            <li><a href="#organizations" class="submenu-link">Организации</a></li>
+            <li><a href="./organizations.php" class="submenu-link">Организации</a></li>
             <li><a href="#groups" class="submenu-link">Группы</a></li>
             <li><a href="#programs" class="submenu-link">Программы</a></li>
             <li><a href="#practices-ref" class="submenu-link">Практики</a></li>
