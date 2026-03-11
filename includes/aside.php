@@ -18,9 +18,9 @@
         <details open>
           <summary class="nav-link nav-link--parent">Практики</summary>
           <ul class="submenu">
-            <li><a href="#active-practices" class="submenu-link">Активные</a></li>
-            <li><a href="#expired-practices" class="submenu-link">Истекшие</a></li>
-            <li><a href="#draft-practices" class="submenu-link">Черновики</a></li>
+            <li><a href="./active-practices.php" class="submenu-link">Активные</a></li>
+            <li><a href="./expired-practices.php" class="submenu-link">Архив</a></li>
+            <li><a href="#draft-practices" class="submenu-link">Планирование</a></li>
           </ul>
         </details>
       </li>
