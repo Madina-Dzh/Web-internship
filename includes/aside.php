@@ -41,10 +41,8 @@
           <summary class="nav-link nav-link--parent">Справочники</summary>
           <ul class="submenu">
             <li><a href="./organizations.php" class="submenu-link">Организации</a></li>
-            <li><a href="#groups" class="submenu-link">Группы</a></li>
-            <li><a href="#programs" class="submenu-link">Программы</a></li>
-            <li><a href="#practices-ref" class="submenu-link">Практики</a></li>
-            <li><a href="#specialties" class="submenu-link">Специальности</a></li>
+            <li><a href="./groups.php" class="submenu-link">Группы</a></li>
+            <li><a href="./specialties.php" class="submenu-link">Специальности</a></li>
           </ul>
         </details>
       </li>
