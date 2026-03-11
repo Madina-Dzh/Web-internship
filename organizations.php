@@ -31,11 +31,14 @@
 
             <!-- Фильтры -->
             <div class="filter-container">
-                <label for="subject-filter">Название:</label>
-                <input type="text" id="subject-filter" placeholder="Введите название">
+                <label for="subject-filter">Группа:</label>
+                <input type="text" id="subject-filter" placeholder="Введите группу">
 
-                <label for="subject-filter">Договор:</label>
-                <input type="text" id="subject-filter" placeholder="Есть/Нет">
+                <label for="subject-filter">Специальность:</label>
+                <input type="text" id="subject-filter" placeholder="Введите специальность">
+
+                <label for="subject-filter">Куратор:</label>
+                <input type="text" id="subject-filter" placeholder="Введите ФИО">
             </div>
 
             <!-- Таблица договоров -->
