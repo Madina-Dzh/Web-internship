@@ -35,20 +35,31 @@
             <!-- Таблица договоров -->
             <div class="table-wrapper">
                 <?php
-                    echo "<table class='contracts-table'><thead><tr>
-                            <th class='radio'></th>
-                            <th>Номер</th>
-                            <th>Организация</th>
-                            <th>Дата начала</th>
-                            <th>Дата конца</th>
-                            <th>Действия</th>
-                        </tr></thead>";
-                    while ($row = mysqli_fetch_array($activeContract)) {
-                        print("<tr><td class='radio'><input type='radio' name='groupContract'></td><td>" . str_pad($row['Номер'], 3, '0', STR_PAD_LEFT) . "</td><td> " . $row['Организация'] ."</td><td> " . date('d.m.Y', strtotime($row['Дата_начала']))  . "</td><td> " . date('d.m.Y', strtotime($row['Дата_конца']))  . "</td>
-                            <td><button class='details-btn' onclick='goToDetails('001')'>Детали</button></td>");
-                    }
-                    echo "</table>"
-                ?>
+echo "<table class='contracts-table'>
+    <thead>
+        <tr>
+            <th class='radio'></th>
+            <th>Номер</th>
+            <th>Организация</th>
+            <th>Дата начала</th>
+            <th>Дата конца</th>
+            <th>Действия</th>
+        </tr>
+    </thead>";
+while ($row = mysqli_fetch_array($activeContract)) {
+    print("<tr data-id='" . htmlspecialchars($row['Номер']) . "'>
+              <td class='radio'><input type='radio' name='groupContract'></td>
+              <td>" . str_pad($row['Номер'], 3, '0', STR_PAD_LEFT) . "</td>
+              <td>" . htmlspecialchars($row['Организация']) . "</td>
+              <td>" . date('d.m.Y', strtotime($row['Дата_начала'])) . "</td>
+              <td>" . date('d.m.Y', strtotime($row['Дата_конца'])) . "</td>
+              <td>
+                  <button class='details-btn' onclick=".'"' . "window.location.href = 'contract-details.php?id=" . rawurlencode($row['Номер']) . "'" .'"'  .">Детали</button>
+              </td>
+          </tr>");
+}
+echo "</table>";
+?>
                 
             </div>
 
@@ -66,5 +77,7 @@
     <?php
         include 'includes/footer.php';
     ?>
+
+
 </body>
 </html>
