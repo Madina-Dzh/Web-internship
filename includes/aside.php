@@ -20,7 +20,7 @@
           <ul class="submenu">
             <li><a href="./active-practices.php" class="submenu-link">Активные</a></li>
             <li><a href="./expired-practices.php" class="submenu-link">Архив</a></li>
-            <li><a href="#draft-practices" class="submenu-link">Планирование</a></li>
+            <li><a href="./planning-practices.php" class="submenu-link">Планирование</a></li>
           </ul>
         </details>
       </li>

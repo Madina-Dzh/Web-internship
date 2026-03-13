@@ -28,7 +28,7 @@
             <div class="tabs">
                 <a href="./active-practices.php" class="tab">Активные</a>
                 <a href="./expired-practices.php" class="tab active">Архив</a>
-                <a href="#drafts.html" class="tab">Планирование</a>
+                <a href="./planning-practices.php" class="tab">Планирование</a>
             </div>
             <!-- Фильтры -->
             <div class="filter-container">
