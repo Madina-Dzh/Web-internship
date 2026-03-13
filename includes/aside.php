@@ -31,7 +31,7 @@
           <ul class="submenu">
             <li><a href="./active-contracts.php" class="submenu-link">Активные</a></li>
             <li><a href="./expired-contracts.php" class="submenu-link">Истекшие</a></li>
-            <li><a href="#draft-contracts" class="submenu-link">Черновики</a></li>
+            <li><a href="./draft-contract.php" class="submenu-link">Черновики</a></li>
           </ul>
         </details>
       </li>

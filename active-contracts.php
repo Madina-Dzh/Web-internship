@@ -4,10 +4,11 @@
 
     $query = "SELECT C.contract_code AS Номер, O.title AS Организация, C.start_date AS Дата_начала, C.end_date AS Дата_конца
     FROM Organization O INNER JOIN Contract C ON C.organization_code = O.organization_code
-    WHERE Date(C.end_date) > CURDATE()
+    WHERE c.status = 'active'
     ORDER BY Номер";
 
     $activeContract = $mysql->query($query);
+    $row_cnt = $activeContract->num_rows;
 ?>
 
 <!DOCTYPE html>
@@ -29,7 +30,7 @@
             <div class="tabs">
                 <a href="./active-contracts.php" class="tab active">Активные</a>
                 <a href="./expired-contracts.php" class="tab">Истекшие</a>
-                <a href="#drafts.html" class="tab">Черновики</a>
+                <a href="./draft-contract.php" class="tab">Черновики</a>
             </div>
 
             <!-- Таблица договоров -->
@@ -70,7 +71,7 @@ echo "</table>";
                     <button class="action-btn add">Добавить договор с организацией</button>
                     <button class="action-btn edit">Изменить договор</button>
                 </div>
-                <div class="record-count">Записей: 9</div>
+                <div class="record-count">Записей: <?php print($row_cnt) ?></div>
             </div>
         </div>
     </div>
