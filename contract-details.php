@@ -31,7 +31,7 @@ if ($endDate >= date('Y-m-d')) {
 }
 
 // Для таблицы
-$query = "SELECT d.id AS Номер, c.Shifr_spec AS Шифр_спец, C.Nazvanie AS Специальность, C.Sokrashenie AS Сокр_спец, s.title AS Практика, d.shifr_gr AS Группа, d.quantity AS Количество, p.start_date AS Дата_начала, p.end_date AS Дата_конца, p.hours AS Часы FROM contract_details D INNER JOIN practice P ON P.practice_code = D.practice_code INNER JOIN subjects_in_cycle S ON S.id = P.subject_code INNER JOIN `group` G ON g.Shifr_gr = D.shifr_gr INNER JOIN speciality c ON C.Shifr_spec = G.Shifr_spec;";
+$query = "SELECT d.id AS Номер, c.Shifr_spec AS Шифр_спец, C.Nazvanie AS Специальность, C.Sokrashenie AS Сокр_спец, s.title AS Практика, d.shifr_gr AS Группа, d.quantity AS Количество, p.start_date AS Дата_начала, p.end_date AS Дата_конца FROM contract_details D INNER JOIN practice P ON P.practice_code = D.practice_code INNER JOIN subjects_in_cycle S ON S.id = P.subject_code INNER JOIN `group` G ON g.Shifr_gr = D.shifr_gr INNER JOIN speciality c ON C.Shifr_spec = G.Shifr_spec;";
 $details = $mysql->query($query);
 $row_cnt = $details->num_rows;
 ?>
@@ -69,7 +69,6 @@ echo "<table class='contracts-table'>
             <th>Наименование компонента образовательной программы, при реализации которого организуется практическая подготовка</th>
             <th>Количество обучающихся, осваивающих соответствующий компонент образовательной программы</th>
             <th>Сроки органищации практической подготовки (в соответствии с календарным учебным графиком / с...по...)</th>
-            <th>Объем времени, отводимый на реализацию компонента образовательной программы в форме практической подготовки (в академических часах)</th>
         </tr>
     </thead>";
 while ($row = mysqli_fetch_array($details)) {
@@ -78,9 +77,8 @@ while ($row = mysqli_fetch_array($details)) {
               <td>" . $row['Номер'] . "</td>
               <td>" . $row['Практика'] . "\n" . $row["Группа"] . "</td>
               <td>" . $row['Количество'] . "</td>
-              <td>c " . date('d.m.Y', strtotime($row['Дата_начала'])) . " по " . date('d.m.Y', strtotime($row['Дата_конца'])) . "</td>
-              <td>". $row['Часы'] ."
-              </td>
+              <td>c " . date('d.m.Y', strtotime($row['Дата_начала'])) . " по " . date('d.m.Y', strtotime($row['Дата_конца'])) . 
+              "</td>
           </tr>");
 }
 echo "</table>";

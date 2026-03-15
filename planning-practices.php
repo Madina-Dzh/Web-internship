@@ -46,7 +46,7 @@ $teachers = $mysql->query($query);
                 <div class="alert alert-success">Практика успешно добавлена!</div>
                 <div class="alert alert-error">Ошибка при добавлении практики</div>-->
 
-                <form class="practice-form">
+                <form class="practice-form"  id="practiceForm" action="add_practice.php" method="POST">
                     <h2>Добавление новой практики</h2>
 
                     <div class="form-group">
@@ -101,4 +101,58 @@ $teachers = $mysql->query($query);
         include 'includes/footer.php';
     ?>
 </body>
+
+<script>
+document.getElementById('practiceForm').addEventListener('submit', function(e) {
+    e.preventDefault(); // Отменяем стандартную отправку формы
+
+    const formData = new FormData(this);
+
+    fetch('add_practice.php', {
+        method: 'POST',
+        body: formData
+    })
+    .then(response => response.json())
+    .then(data => {
+        const alertContainer = document.querySelector('.form-container');
+
+        // Удаляем предыдущие сообщения
+        const existingAlerts = alertContainer.querySelectorAll('.alert');
+        existingAlerts.forEach(alert => alert.remove());
+
+        if (data.success) {
+            // Показываем сообщение об успехе
+            const successAlert = document.createElement('div');
+            successAlert.className = 'alert alert-success';
+            successAlert.textContent = 'Практика успешно добавлена!';
+            alertContainer.insertBefore(successAlert, this); // ОШИБКА: такого метода нет
+
+            // Правильный вариант:
+            alertContainer.prepend(successAlert); // Вставляем в начало контейнера
+
+            // Очищаем форму
+            this.reset();
+        } else {
+            // Показываем ошибки
+            data.errors.forEach(error => {
+                const errorAlert = document.createElement('div');
+                errorAlert.className = 'alert alert-error';
+                errorAlert.textContent = error;
+                alertContainer.prepend(errorAlert); // Вставляем перед формой
+            });
+        }
+    })
+    .catch(error => {
+        console.error('Ошибка:', error);
+        const alertContainer = document.querySelector('.form-container');
+        const errorAlert = document.createElement('div');
+        errorAlert.className = 'alert alert-error';
+        errorAlert.textContent = 'Произошла непредвиденная ошибка';
+        alertContainer.prepend(errorAlert);
+    });
+});
+</script>
+
+
+
 </html>
