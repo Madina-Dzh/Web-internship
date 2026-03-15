@@ -1,3 +1,21 @@
+<?php 
+$mysql = new mysqli("localhost", "root", "", "internship");
+$mysql->query("SET NAMES 'utf8'");
+
+// Предметы
+$query = "SELECT `id`, `code`
+FROM `subjects_in_cycle` 
+WHERE title LIKE '%практика%' OR title LIKE '%ПРАКТИКА%'";
+$subjects = $mysql->query($query);
+
+// Преподаватели
+$query = "SELECT `Tab_nom`, `FIO`
+FROM `teacher` 
+WHERE 1
+ORDER BY FIO";
+$teachers = $mysql->query($query);
+?>
+
 <!DOCTYPE html>
 <html lang="ru">
 <head>
@@ -39,10 +57,12 @@
             <div class="form-group">
                 <label for="subject_code">Предмет:</label>
                 <select id="subject_code" name="subject_code" required>
-                    <option value="">Выберите предмет</option>
-                    <option value="1">МАТ-001 - Математика</option>
-            <option value="2">ФИЗ-002 - Физика</option>
-            <option value="3">ИНФ-003 - Информатика</option>
+                    <option value="">Выберите предмет</option> 
+                    <?php 
+                        while ($row = mysqli_fetch_array($subjects)) {
+                            print("<option value='" . $row['id'] . "'>" . $row['code'] . "</option>");
+                        }
+                    ?>
                 </select>
             </div>
 
@@ -50,9 +70,11 @@
                 <label for="teacher">Преподаватель:</label>
                 <select id="teacher" name="teacher" required>
                     <option value="">Выберите преподавателя</option>
-            <option value="101">Иванов И.И.</option>
-            <option value="102">Петров П.П.</option>
-            <option value="103">Сидоров С.С.</option>
+                    <?php 
+                        while ($row = mysqli_fetch_array($teachers)) {
+                            print("<option value='" . $row['Tab_nom'] . "'>" . $row['FIO'] . "</option>");
+                        }
+                    ?>
                 </select>
             </div>
 
