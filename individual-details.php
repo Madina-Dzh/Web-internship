@@ -5,32 +5,40 @@ $mysql->query("SET NAMES 'utf8'");
 // Получаем параметр 'id' из URL
 $id = isset($_GET['id']) ? $_GET['id'] : '';
 
-// Название организации
+// Получаем данные о договоре напрямую из таблицы contract (не зависит от наличия деталей)
 $query = "SELECT C.contract_code AS Договор, O.title AS title, C.start_date AS Дата_начала, C.end_date AS Дата_конца
-FROM contract_details D INNER JOIN contract C ON C.contract_code=D.contract_code INNER JOIN organization O ON O.organization_code = C.organization_code
+FROM contract C
+LEFT JOIN organization O ON O.organization_code = C.organization_code
 WHERE C.contract_code = " . $id;
 $result = $mysql->query($query);
+
 if ($result && $result->num_rows > 0) {
     $row = $result->fetch_assoc();
-    $organization = $row['title'];
+    $organization = $row['title'] ?? "Организация не указана";
     $startDate = $row['Дата_начала'];
     $endDate = $row['Дата_конца'];
 } else {
-    $organization = "Организация не указана";
+    // Если договор не найден вообще
+    $organization = "Договор не найден";
     $startDate = "";
     $endDate = "";
 }
 
-// Сравниваем даты
+// Сравниваем даты (с проверкой на пустоту)
 if (!empty($endDate) && $endDate >= date('Y-m-d')) {
-    $status = "Действует"; // Контракт ещё действует
+    $status = "Действует";
 } else {
-    $status = "Завершен";  // Контракт завершён
+    $status = "Завершен";
 }
 
-// Для таблицы
+// Для таблицы — теперь безопасно, даже если деталей нет
 $query = "SELECT d.id AS Номер, c.Shifr_spec AS Шифр_спец, C.Nazvanie AS Специальность, C.Sokrashenie AS Сокр_спец, s.title AS Практика, d.shifr_gr AS Группа, d.fio AS ФИО, p.start_date AS Дата_начала, p.end_date AS Дата_конца, R.contract_code AS Договор
-FROM contract_details D INNER JOIN contract R ON R.contract_code=D.contract_code INNER JOIN practice P ON P.practice_code = D.practice_code INNER JOIN subjects_in_cycle S ON S.id = P.subject_code INNER JOIN `group` G ON g.Shifr_gr = D.shifr_gr INNER JOIN speciality c ON C.Shifr_spec = G.Shifr_spec
+FROM contract_details D
+INNER JOIN contract R ON R.contract_code = D.contract_code
+INNER JOIN practice P ON P.practice_code = D.practice_code
+INNER JOIN subjects_in_cycle S ON S.id = P.subject_code
+INNER JOIN `group` G ON g.Shifr_gr = D.shifr_gr
+INNER JOIN speciality c ON C.Shifr_spec = G.Shifr_spec
 WHERE R.contract_code = " . $id;
 $details = $mysql->query($query);
 $row_cnt = $details ? $details->num_rows : 0;

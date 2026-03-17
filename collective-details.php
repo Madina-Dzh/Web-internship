@@ -47,16 +47,14 @@ $row_cnt = $details->num_rows;
     <link rel="stylesheet" href="./css/contract-details.css">
 </head>
 <body>
-     <?php
-        include 'includes/header.php';
-    ?>
+    <?php include 'includes/header.php';?>
     <div class="container">
-        <?php include 'includes/aside.php';?>
+        <?php include 'includes/aside.php'; ?>
         <div class="main-wrapper">
             <div class="info-compact">
                 <span class="info-item contract-num">Договор № <?php print(str_pad($id, 3, '0', STR_PAD_LEFT)) ?></span>
                 <span class="info-item organization">Организация: <?php print($organization) ?></span>
-                <span class="info-item start-date">Начало: <?php print(date('d.m.Y', strtotime($startDAte))) ?></span>
+                <span class="info-item start-date">Начало: <?php print(date( 'd.m.Y', strtotime($startDAte))) ?></span>
                 <span class="info-item status status-<?php print(strtolower($status)) ?>">Статус: <?php print($status) ?></span>
             </div>
 
@@ -72,23 +70,30 @@ echo "<table class='contracts-table'>
             <th>Количество обучающихся, осваивающих соответствующий компонент образовательной программы</th>
             <th>Сроки организации практической подготовки (в соответствии с календарным учебным графиком / с...по...)</th>
         </tr>
-    </thead>";
+    </thead>
+    <tbody>";
+
+if ($details && $row_cnt > 0) {
     $count = 1;
-while ($row = mysqli_fetch_array($details)) {
-    print("<tr data-id='" . htmlspecialchars($row['Номер']) . "'>
-              <td class='radio'><input type='radio' name='details'></td>
-              <td>" . $count . "</td>
-              <td>" . $row['Практика'] . "\n" . $row["Группа"] . "</td>
-              <td>" . $row['Количество'] . "</td>
-              <td>c " . date('d.m.Y', strtotime($row['Дата_начала'])) . " по " . date('d.m.Y', strtotime($row['Дата_конца'])) . 
-              "</td>
-              <td>" . "</td>
+    while ($row = mysqli_fetch_array($details)) {
+        print("<tr data-id='" . htmlspecialchars($row['Номер']) . "'>
+                  <td class='radio'><input type='radio' name='details'></td>
+                  <td>" . $count . "</td>
+                  <td>" . htmlspecialchars($row['Практика']) . "\n" . htmlspecialchars($row["Группа"]) . "</td>
+                  <td>" . htmlspecialchars($row['Количество']) . "</td>
+                  <td>c " . date('d.m.Y', strtotime($row['Дата_начала'])) . " по " . date('d.m.Y', strtotime($row['Дата_конца'])) . "</td>
+              </tr>");
+        $count++;
+    }
+} else {
+    print("<tr>
+              <td class='radio'></td>
+              <td colspan='4' style='text-align: center; color: #666;'>Данные отсутствуют</td>
           </tr>");
-};
-$count = $count+1;
-echo "</table>";
+}
+
+echo "</tbody></table>";
 ?>
-                
             </div>
 
             <!-- Футер таблицы с кнопками и счётчиком -->
@@ -101,11 +106,8 @@ echo "</table>";
                 </div>
                 <div class="record-count">Записей: <?php print($row_cnt) ?></div>
             </div>
-
         </div>
     </div>
-    <?php
-        include 'includes/footer.php';
-    ?>
+    <?php include 'includes/footer.php'; ?>
 </body>
 </html>
