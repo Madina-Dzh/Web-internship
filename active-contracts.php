@@ -2,7 +2,7 @@
     $mysql = new mysqli("localhost", "root", "", "internship");
     $mysql->query("SET NAMES 'utf8'");
 
-    $query = "SELECT C.contract_code AS Номер, O.title AS Организация, C.start_date AS Дата_начала, C.end_date AS Дата_конца
+    $query = "SELECT C.contract_code AS Номер, O.title AS Организация, C.start_date AS Дата_начала, C.end_date AS Дата_конца, C.type AS Тип
     FROM Organization O INNER JOIN Contract C ON C.organization_code = O.organization_code
     WHERE c.status = 'active'
     ORDER BY Номер";
@@ -44,20 +44,39 @@ echo "<table class='contracts-table'>
             <th>Организация</th>
             <th>Дата начала</th>
             <th>Дата конца</th>
+            <th>Тип</th>
             <th>Действия</th>
         </tr>
     </thead>";
 while ($row = mysqli_fetch_array($activeContract)) {
-    print("<tr data-id='" . htmlspecialchars($row['Номер']) . "'>
+    $type = $row['Тип'];
+    if ($type == "коллективный") {
+        print("<tr data-id='" . htmlspecialchars($row['Номер']) . "'>
               <td class='radio'><input type='radio' name='groupContract'></td>
               <td>" . str_pad($row['Номер'], 3, '0', STR_PAD_LEFT) . "</td>
               <td>" . htmlspecialchars($row['Организация']) . "</td>
               <td>" . date('d.m.Y', strtotime($row['Дата_начала'])) . "</td>
               <td>" . date('d.m.Y', strtotime($row['Дата_конца'])) . "</td>
+              <td>" . $type ."</td>
               <td>
-                  <button class='details-btn' onclick=".'"' . "window.location.href = 'contract-details.php?id=" . rawurlencode($row['Номер']) . "'" .'"'  .">Детали</button>
+                  <button class='details-btn' onclick=".'"' . "window.location.href = 'collective-details.php?id=" . rawurlencode($row['Номер']) . "'" .'"'  .">Детали</button>
               </td>
           </tr>");
+    }
+    else {
+        print("<tr data-id='" . htmlspecialchars($row['Номер']) . "'>
+              <td class='radio'><input type='radio' name='groupContract'></td>
+              <td>" . str_pad($row['Номер'], 3, '0', STR_PAD_LEFT) . "</td>
+              <td>" . htmlspecialchars($row['Организация']) . "</td>
+              <td>" . date('d.m.Y', strtotime($row['Дата_начала'])) . "</td>
+              <td>" . date('d.m.Y', strtotime($row['Дата_конца'])) . "</td>
+              <td>" . $type ."</td>
+              <td>
+                  <button class='details-btn' onclick=".'"' . "window.location.href = 'individual-details.php?id=" . rawurlencode($row['Номер']) . "'" .'"'  .">Детали</button>
+              </td>
+          </tr>");
+    }
+    
 }
 echo "</table>";
 ?>
