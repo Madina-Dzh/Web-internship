@@ -1,8 +1,11 @@
-<?php 
+<?php
+
+use function PHPSTORM_META\type;
+
     $mysql = new mysqli("localhost", "root", "", "internship");
     $mysql->query("SET NAMES 'utf8'");
 
-    $query = "SELECT C.contract_code AS Номер, O.title AS Организация, C.start_date AS Дата_начала, C.end_date AS Дата_конца
+    $query = "SELECT C.contract_code AS Номер, O.title AS Организация, C.start_date AS Дата_начала, C.end_date AS Дата_конца, C.type AS Тип
     FROM Organization O INNER JOIN Contract C ON C.organization_code = O.organization_code
     WHERE c.status = 'draft'
     ORDER BY Номер";
@@ -36,20 +39,50 @@
             <!-- Таблица договоров -->
             <div class="table-wrapper">
                 <?php
-                    echo "<table class='contracts-table'><thead><tr>
-                            <th class='radio'></th>
-                            <th>Номер</th>
-                            <th>Организация</th>
-                            <th>Дата начала</th>
-                            <th>Дата конца</th>
-                            <th>Действия</th>
-                        </tr></thead>";
-                    while ($row = mysqli_fetch_array($dreaftContract)) {
-                        print("<tr><td class='radio'><input type='radio' name='groupContract'></td><td>" . str_pad($row['Номер'], 3, '0', STR_PAD_LEFT) . "</td><td> " . $row['Организация'] ."</td><td> " . date('d.m.Y', strtotime($row['Дата_начала']))  . "</td><td> " . date('d.m.Y', strtotime($row['Дата_конца']))  . "</td>
-                            <td><button class='details-btn' onclick='goToDetails('001')'>Детали</button></td>");
-                    }
-                    echo "</table>"
-                ?>
+echo "<table class='contracts-table'>
+    <thead>
+        <tr>
+            <th class='radio'></th>
+            <th>Номер</th>
+            <th>Организация</th>
+            <th>Дата начала</th>
+            <th>Дата конца</th>
+            <th>Тип</th>
+            <th>Действия</th>
+        </tr>
+    </thead>";
+while ($row = mysqli_fetch_array($dreaftContract)) {
+    $type = $row['Тип'];
+    if ($type == "коллективный") {
+        print("<tr data-id='" . htmlspecialchars($row['Номер']) . "'>
+              <td class='radio'><input type='radio' name='groupContract'></td>
+              <td>" . str_pad($row['Номер'], 3, '0', STR_PAD_LEFT) . "</td>
+              <td>" . htmlspecialchars($row['Организация']) . "</td>
+              <td>" . date('d.m.Y', strtotime($row['Дата_начала'])) . "</td>
+              <td>" . date('d.m.Y', strtotime($row['Дата_конца'])) . "</td>
+              <td>" . $type ."</td>
+              <td>
+                  <button class='details-btn' onclick=".'"' . "window.location.href = 'collective-details.php?id=" . rawurlencode($row['Номер']) . "'" .'"'  .">Детали</button>
+              </td>
+          </tr>");
+    }
+    else {
+        print("<tr data-id='" . htmlspecialchars($row['Номер']) . "'>
+              <td class='radio'><input type='radio' name='groupContract'></td>
+              <td>" . str_pad($row['Номер'], 3, '0', STR_PAD_LEFT) . "</td>
+              <td>" . htmlspecialchars($row['Организация']) . "</td>
+              <td>" . date('d.m.Y', strtotime($row['Дата_начала'])) . "</td>
+              <td>" . date('d.m.Y', strtotime($row['Дата_конца'])) . "</td>
+              <td>" . $type ."</td>
+              <td>
+                  <button class='details-btn' onclick=".'"' . "window.location.href = 'individual-details.php?id=" . rawurlencode($row['Номер']) . "'" .'"'  .">Детали</button>
+              </td>
+          </tr>");
+    }
+    
+}
+echo "</table>";
+?>
                 
             </div>
 
