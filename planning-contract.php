@@ -1,19 +1,9 @@
 <?php 
 $mysql = new mysqli("localhost", "root", "", "internship");
 $mysql->query("SET NAMES 'utf8'");
-
-// Предметы
-$query = "SELECT `id`, `code`
-FROM `subjects_in_cycle` 
-WHERE title LIKE '%практика%' OR title LIKE '%ПРАКТИКА%'";
-$subjects = $mysql->query($query);
-
-// Преподаватели
-$query = "SELECT `Tab_nom`, `FIO`
-FROM `teacher` 
-WHERE 1
-ORDER BY FIO";
-$teachers = $mysql->query($query);
+$query = "SELECT organization_code, title
+FROM organization";
+$organizations = $mysql->query($query);
 ?>
 
 <!DOCTYPE html>
@@ -33,12 +23,6 @@ $teachers = $mysql->query($query);
         <?php include 'includes/aside.php'; ?>
 
         <main class="main-wrapper">
-            <!-- Вкладки -->
-            <div class="tabs">
-                <a href="./active-practices.php" class="tab">Активные</a>
-                <a href="./expired-practices.php" class="tab">Архив</a>
-                <a href="./planning-practices.php" class="tab active">Планирование</a>
-            </div>
 
             <!-- Форма добавления практики -->
             <div class="form-container">
@@ -46,55 +30,51 @@ $teachers = $mysql->query($query);
                 <div class="alert alert-success">Практика успешно добавлена!</div>
                 <div class="alert alert-error">Ошибка при добавлении практики</div>-->
 
-                <form class="practice-form"  id="practiceForm" action="add_practice.php" method="POST">
-                    <h2>Добавление новой практики</h2>
+                <form class="practice-form"  id="practiceForm" action="add_contract.php" method="POST">
+                    <h2>Добавление нового договора</h2>
 
                     <div class="form-group">
-                <label for="practice_code">Номер практики:</label>
-                <input type="text" id="practice_code" name="practice_code" required>
-            </div>
+                        <label for="contract_code">Номер договора:</label>
+                        <input type="text" id="contract_code" name="contract_code" required>
+                    </div>
 
-            <div class="form-group">
-                <label for="subject_code">Предмет:</label>
-                <select id="subject_code" name="subject_code" required>
-                    <option value="">Выберите предмет</option> 
-                    <?php 
-                        while ($row = mysqli_fetch_array($subjects)) {
-                            print("<option value='" . $row['id'] . "'>" . $row['code'] . "</option>");
-                        }
-                    ?>
-                </select>
-            </div>
+                    <div class="form-group">
+                        <label for="organization_code">Организация:</label>
+                        <select id="organization_code" name="organization_code" required>
+                            <option value="">Выберите организацию</option> 
+                            <?php 
+                                while ($row = mysqli_fetch_array($organizations)) {
+                                    print("<option value='" . $row['organization_code'] . "'>" . $row['title'] . "</option>");
+                                }
+                            ?> 
+                        </select>
+                    </div>
 
-            <div class="form-group">
-                <label for="teacher">Преподаватель:</label>
-                <select id="teacher" name="teacher" required>
-                    <option value="">Выберите преподавателя</option>
-                    <?php 
-                        while ($row = mysqli_fetch_array($teachers)) {
-                            print("<option value='" . $row['Tab_nom'] . "'>" . $row['FIO'] . "</option>");
-                        }
-                    ?>
-                </select>
-            </div>
+                    <div class="form-group">
+                        <label for="type">Тип организации:</label>
+                        <select id="type" name="type" required>
+                            <option value="индивидуальный">индивидуальный</option> 
+                            <option value="коллективный">коллективный</option>
+                        </select>
+                    </div>
 
-            <div class="form-group">
-                <label for="start_date">Дата начала:</label>
-                <input type="date" id="start_date" name="start_date" required>
-            </div>
+                    <div class="form-group">
+                        <label for="start_date">Дата начала:</label>
+                        <input type="date" id="start_date" name="start_date" required>
+                    </div>
 
-            <div class="form-group">
-                <label for="end_date">Дата окончания:</label>
-                <input type="date" id="end_date" name="end_date" required>
-            </div>
+                    <div class="form-group">
+                        <label for="end_date">Дата окончания:</label>
+                        <input type="date" id="end_date" name="end_date" required>
+                    </div>
 
-            <div class="form-actions">
-                <button type="submit" class="btn btn-primary">Добавить практику</button>
-                <button type="reset" class="btn btn-secondary">Очистить форму</button>
+                    <div class="form-actions">
+                        <button type="submit" class="btn btn-primary">Добавить договор</button>
+                        <button type="reset" class="btn btn-secondary">Очистить форму</button>
+                    </div>
+                </form>
             </div>
-        </form>
-    </div>
-</main>
+        </main>
     </div>
 
     <?php
@@ -108,7 +88,7 @@ document.getElementById('practiceForm').addEventListener('submit', function(e) {
 
     const formData = new FormData(this);
 
-    fetch('add_practice.php', {
+    fetch('add_contract.php', {
         method: 'POST',
         body: formData
     })
