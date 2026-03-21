@@ -1,0 +1,140 @@
+<?php 
+$mysql = new mysqli("localhost", "root", "", "internship");
+$mysql->query("SET NAMES 'utf8'");
+
+// Получаем параметр 'id' из URL
+$id = isset($_GET['id']) ? $_GET['id'] : '';
+
+// практики
+$query = "SELECT `practice_code`, `subject_code`, `start_date`, `end_date`, `teacher` FROM `practice` 
+WHERE DATE(end_date) > CURDATE()";
+$practices = $mysql->query($query);
+
+$query = "SELECT `Shifr_gr`
+FROM `group` WHERE 1";
+$groups = $mysql->query($query);
+?>
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Планирование практик</title>
+    <link rel="stylesheet" href="./css/form.css">
+</head>
+<body class="site">
+    <?php
+        include 'includes/header.php';
+    ?>
+
+    <div class="container">
+        <?php include 'includes/aside.php'; ?>
+
+        <main class="main-wrapper">
+
+            <div class="form-container">
+
+                <form class="practice-form"  id="practiceForm" action="add_collDet.php" method="POST">
+                    <input type="hidden" name="id" value="<?php echo htmlspecialchars($id); ?>">
+
+                    <h2>Добавление Группы в договор для <?php print($id) ?></h2>
+                    
+
+                    <div class="form-group">
+                        <label for="group">Группа:</label>
+                        <select id="group" name="group" required>
+                            <option value="">Выберите практику</option> 
+                            <?php 
+                                while ($row = mysqli_fetch_array($groups)) {
+                                    print("<option value='" . $row['Shifr_gr'] . "'>" . $row['Shifr_gr'] . "</option>");
+                                }
+                            ?> 
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="practice_code">Практика:</label>
+                        <select id="practice_code" name="practice_code" required>
+                            <option value="">Выберите практику</option> 
+                            <?php 
+                                while ($row = mysqli_fetch_array($practices)) {
+                                    print("<option value='" . $row['practice_code'] . "'>" . $row['practice_code'] . "</option>");
+                                }
+                            ?> 
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="quantity">Количество студентов:</label>
+                        <input type="text" id="quantity" name="quantity" required>
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="submit" class="btn btn-primary">Добавить договор</button>
+                        <button type="reset" class="btn btn-secondary">Очистить форму</button>
+                    </div>
+                </form>
+            </div>
+        </main>
+    </div>
+
+    <?php
+        include 'includes/footer.php';
+    ?>
+</body>
+
+<script>/*
+document.getElementById('practiceForm').addEventListener('submit', function(e) {
+    e.preventDefault(); // Отменяем стандартную отправку формы
+
+    const formData = new FormData(this);
+
+    fetch('add_contract.php', {
+        method: 'POST',
+        body: formData
+    })
+    .then(response => response.json())
+    .then(data => {
+        const alertContainer = document.querySelector('.form-container');
+
+        // Удаляем предыдущие сообщения
+        const existingAlerts = alertContainer.querySelectorAll('.alert');
+        existingAlerts.forEach(alert => alert.remove());
+
+        if (data.success) {
+            // Показываем сообщение об успехе
+            const successAlert = document.createElement('div');
+            successAlert.className = 'alert alert-success';
+            successAlert.textContent = 'Группа успешно добавлена!';
+            alertContainer.prepend(successAlert);
+
+            // Правильный вариант:
+            alertContainer.prepend(successAlert); // Вставляем в начало контейнера
+
+            // Очищаем форму
+            this.reset();
+        } else {
+            // Показываем ошибки
+            data.errors.forEach(error => {
+                const errorAlert = document.createElement('div');
+                errorAlert.className = 'alert alert-error';
+                errorAlert.textContent = error;
+                alertContainer.prepend(errorAlert); // Вставляем перед формой
+            });
+        }
+    })
+    .catch(error => {
+        console.error('Ошибка:', error);
+        const alertContainer = document.querySelector('.form-container');
+        const errorAlert = document.createElement('div');
+        errorAlert.className = 'alert alert-error';
+        errorAlert.textContent = 'Произошла непредвиденная ошибка';
+        alertContainer.prepend(errorAlert);
+    });
+});*/
+</script>
+
+
+
+</html>

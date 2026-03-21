@@ -100,7 +100,7 @@ echo "</tbody></table>";
             <div class="table-footer">
                 <div class="actions">
                     <button class="action-btn edit">Изменить дату</button>
-                    <button class="action-btn add">Добавить группу</button>
+                    <button class="action-btn add" onclick="window.location.href='planning-collDet.php?id=<?php echo $id; ?>'">Добавить группу</button>
                     <button class="action-btn edit">Изменить для группы</button>
                     <button class="action-btn delete">Удалить группу из договора</button>
                 </div>
