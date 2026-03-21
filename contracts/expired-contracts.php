@@ -9,6 +9,8 @@
 
     $expiredContract = $mysql->query($query);
     $row_cnt = $expiredContract->num_rows;
+
+    require_once dirname(__DIR__) . '/includes/config.php';
 ?>
 
 <!DOCTYPE html>
@@ -17,14 +19,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Истекшие договора</title>
-    <link rel="stylesheet" href="./css/contracts.css">
+    <link rel="stylesheet" href="<?php echo CSS_URL; ?>contracts.css">
 </head>
 <body class="site">
     <?php
-        include 'includes/header.php';
+        include '../includes/header.php';
     ?>
     <div class="container">
-        <?php include 'includes/aside.php'; ?>
+        <?php include '../includes/aside.php'; ?>
         <div class="main-wrapper">
             <!-- Вкладки -->
             <div class="tabs">
@@ -59,7 +61,7 @@ while ($row = mysqli_fetch_array($expiredContract)) {
               <td>" . date('d.m.Y', strtotime($row['Дата_конца'])) . "</td>
               <td>" . $type ."</td>
               <td>
-                  <button class='details-btn' onclick=".'"' . "window.location.href = 'collective-details.php?id=" . rawurlencode($row['Номер']) . "'" .'"'  .">Детали</button>
+                  <button class='details-btn' onclick=".'"' . "window.location.href = '" . CONTRACTS_URL . "collective/collective-details.php?id=" . rawurlencode($row['Номер']) . "'" .'"'  .">Детали</button>
               </td>
           </tr>");
     }
@@ -72,7 +74,7 @@ while ($row = mysqli_fetch_array($expiredContract)) {
               <td>" . date('d.m.Y', strtotime($row['Дата_конца'])) . "</td>
               <td>" . $type ."</td>
               <td>
-                  <button class='details-btn' onclick=".'"' . "window.location.href = 'individual-details.php?id=" . rawurlencode($row['Номер']) . "'" .'"'  .">Детали</button>
+                  <button class='details-btn' onclick=".'"' . "window.location.href = '" . CONTRACTS_URL . "individual/individual-details.php?id=" . rawurlencode($row['Номер']) . "'" .'"'  .">Детали</button>
               </td>
           </tr>");
     }
@@ -95,7 +97,7 @@ echo "</table>";
         </div>
     </div>
     <?php
-        include 'includes/footer.php';
+        include '../includes/footer.php';
     ?>
 </body>
 </html>

@@ -5,6 +5,8 @@
     $query = "SELECT `Shifr_spec` AS Шифр, `Nazvanie` AS Название, `Sokrashenie` AS Сокращение, `Srok_obuch` AS Срок_обучение FROM `speciality`";
     $resSpec = $mysql->query($query);
     $row_cnt = $resSpec->num_rows;
+
+    require_once dirname(__DIR__) . '/includes/config.php';
 ?>
 
 <!DOCTYPE html>
@@ -13,20 +15,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Специальности</title>
-    <link rel="stylesheet" href="./css/contracts.css">
+    <link rel="stylesheet" href="<?php echo CSS_URL; ?>contracts.css">
 </head>
 <body class="site">
     <?php
-        include 'includes/header.php';
+        include '../includes/header.php';
     ?>
     <div class="container">
-        <?php include 'includes/aside.php'; ?>
+        <?php include '../includes/aside.php'; ?>
         <div class="main-wrapper">
             <!-- Вкладки -->
             <div class="tabs">
-                <a href="./organizations.php" class="tab">Организации</a>
-                <a href="./groups.php" class="tab">Группы</a>
-                <a href="./specialities.php" class="tab active">Специальности</a>
+                <a href="<?php echo REFERENCES_URL; ?>organizations.php" class="tab">Организации</a>
+                <a href="<?php echo REFERENCES_URL; ?>groups.php" class="tab">Группы</a>
+                <a href="<?php echo REFERENCES_URL; ?>specialities.php" class="tab active">Специальности</a>
             </div>
 
             <!-- Фильтры -->
@@ -63,7 +65,7 @@
         </div>
     </div>
     <?php
-        include 'includes/footer.php';
+        include '../includes/footer.php';
     ?>
 </body>
 </html>

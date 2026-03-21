@@ -33,7 +33,6 @@ echo "\n\nВыполняемый запрос:\n$query";
 // Выполняем запрос и проверяем результат
 if ($mysql->query($query)) {
     echo "\nЗапись успешно добавлена в базу данных!";
-    // Перенаправление на draft-contract.php через 2 секунды (даём время увидеть вывод)
     header("Refresh: 0; url=collective-details.php?id=$id");
 } else {
     echo "\nОшибка при добавлении записи: " . $mysql->error;

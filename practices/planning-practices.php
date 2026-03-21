@@ -14,6 +14,8 @@ FROM `teacher`
 WHERE 1
 ORDER BY FIO";
 $teachers = $mysql->query($query);
+
+require_once '../includes/config.php';
 ?>
 
 <!DOCTYPE html>
@@ -22,15 +24,15 @@ $teachers = $mysql->query($query);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Планирование практик</title>
-    <link rel="stylesheet" href="./css/form.css">
+    <link rel="stylesheet" href="<?php echo CSS_URL;?>form.css">
 </head>
 <body class="site">
     <?php
-        include 'includes/header.php';
+        include '../includes/header.php';
     ?>
 
     <div class="container">
-        <?php include 'includes/aside.php'; ?>
+        <?php include '../includes/aside.php'; ?>
 
         <main class="main-wrapper">
             <!-- Вкладки -->
@@ -98,7 +100,7 @@ $teachers = $mysql->query($query);
     </div>
 
     <?php
-        include 'includes/footer.php';
+        include '../includes/footer.php';
     ?>
 </body>
 
