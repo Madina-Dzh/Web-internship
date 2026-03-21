@@ -17,7 +17,6 @@ if ($result && $result->num_rows > 0) {
     $endDate = $row['Дата_конца'];
 }
 else {
-    $row = $result->fetch_assoc();
     $organization = "";
     $startDate = "";
     $endDate = "";
@@ -40,6 +39,11 @@ $row_cnt = $details->num_rows;
 require_once dirname(__DIR__, 2) . '/includes/config.php';
 ?>
 
+<?php
+$message = isset($_GET['message']) ? htmlspecialchars($_GET['message']) : '';
+$messageType = isset($_GET['type']) ? htmlspecialchars($_GET['type']) : '';
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -53,6 +57,17 @@ require_once dirname(__DIR__, 2) . '/includes/config.php';
     <div class="container">
         <?php include dirname(__DIR__, 2) . '/includes/aside.php'; ?>
         <div class="main-wrapper">
+            
+            <?php if ($message): ?>
+                <div style="padding: 10px; margin: 15px 0; border-radius: 4px; <?php
+                    echo $messageType === 'success' ?
+                        'background-color: #d4edda; color: #155724; border: 1px solid #c3e6cb;' :
+                        'background-color: #f8d7da; color: #721c24; border: 1px solid #f5c6cb;';
+                ?>">
+                    <?php echo $message; ?>
+                </div>
+            <?php endif; ?>
+
             <div class="info-compact">
                 <span class="info-item contract-num">Договор № <?php print(str_pad($id, 3, '0', STR_PAD_LEFT)) ?></span>
                 <span class="info-item organization">Организация: <?php print($organization) ?></span>
@@ -79,7 +94,7 @@ if ($details && $row_cnt > 0) {
     $count = 1;
     while ($row = mysqli_fetch_array($details)) {
         print("<tr data-id='" . htmlspecialchars($row['Номер']) . "'>
-                  <td class='radio'><input type='radio' name='details'></td>
+                  <td class='radio'><input type='radio' name='selected_group' value='" . (int)$row['Номер'] . "'></td>
                   <td>" . $count . "</td>
                   <td>" . htmlspecialchars($row['Практика']) . "\n" . htmlspecialchars($row["Группа"]) . "</td>
                   <td>" . htmlspecialchars($row['Количество']) . "</td>
@@ -104,12 +119,40 @@ echo "</tbody></table>";
                     <button class="action-btn edit">Изменить дату</button>
                     <button class="action-btn add" onclick="window.location.href='./planning-collDet.php?id=<?php echo $id; ?>'">Добавить группу</button>
                     <button class="action-btn edit">Изменить для группы</button>
-                    <button class="action-btn delete">Удалить группу из договора</button>
+                    <button class="action-btn delete" onclick="deleteGroup()">Удалить группу из договора</button>
                 </div>
                 <div class="record-count">Записей: <?php print($row_cnt) ?></div>
             </div>
         </div>
     </div>
     <?php include dirname(__DIR__, 2) . '/includes/footer.php'; ?>
+
+    <script>
+    function deleteGroup() {
+    // Находим выбранную радиокнопку
+    const selectedRadio = document.querySelector('input[name="selected_group"]:checked');
+
+    if (!selectedRadio) {
+        alert('Пожалуйста, сначала выберите группу для удаления!');
+        return false;
+    }
+
+    const groupId = parseInt(selectedRadio.value);
+    console.log('Выбран ID для удаления:', groupId);
+
+    // Проверка валидности ID
+    if (isNaN(groupId) || groupId <= 0) {
+        alert('Ошибка: некорректный ID группы');
+        return false;
+    }
+
+    const confirmed = confirm('Вы уверены, что хотите удалить группу с ID ' + groupId + '?');
+    if (confirmed) {
+        window.location.href = 'dell_collDet.php?id=' + groupId + '&contract_id=<?php echo urlencode($id); ?>';
+    } else {
+        console.log('Удаление отменено пользователем');
+    }
+}
+</script>
 </body>
 </html>
