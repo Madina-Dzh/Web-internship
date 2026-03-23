@@ -1,4 +1,5 @@
 <?php
+
 $mysql = new mysqli("localhost", "root", "", "internship");
 $mysql->query("SET NAMES 'utf8'");
 
@@ -30,7 +31,7 @@ if ($endDate >= date('Y-m-d')) {
 }
 
 // Для таблицы
-$query = "SELECT d.id AS Номер, c.Shifr_spec AS Шифр_спец, C.Nazvanie AS Специальность, C.Sokrashenie AS Сокр_спец, s.title AS Практика, d.shifr_gr AS Группа, d.quantity AS Количество, p.start_date AS Дата_начала, p.end_date AS Дата_конца, R.contract_code AS Договор 
+$query = "SELECT d.id AS Номер, c.Shifr_spec AS Шифр_спец, C.Nazvanie AS Специальность, C.Sokrashenie AS Сокр_спец, s.title AS Практика, d.shifr_gr AS Группа, d.quantity AS Количество, p.start_date AS Дата_начала, p.end_date AS Дата_конца, R.contract_code AS Договор, P.practice_code AS код_практики
 FROM contract_details D INNER JOIN contract R ON R.contract_code=D.contract_code INNER JOIN practice P ON P.practice_code = D.practice_code INNER JOIN subjects_in_cycle S ON S.id = P.subject_code INNER JOIN `group` G ON g.Shifr_gr = D.shifr_gr INNER JOIN speciality c ON C.Shifr_spec = G.Shifr_spec
 WHERE R.contract_code = " . $id;
 $details = $mysql->query($query);
@@ -90,11 +91,15 @@ echo "<table class='contracts-table'>
     </thead>
     <tbody>";
 
+
 if ($details && $row_cnt > 0) {
     $count = 1;
     while ($row = mysqli_fetch_array($details)) {
         print("<tr data-id='" . htmlspecialchars($row['Номер']) . "'>
-                  <td class='radio'><input type='radio' name='selected_group' value='" . (int)$row['Номер'] . "'></td>
+                  <td class='radio'>
+                      <input type='radio' name='selected_group' value='" . (int)$row['Номер'] . "'>
+                      <input type='hidden' name='practice_code' value='" . htmlspecialchars($row['код_практики']) . "'>
+                  </td>
                   <td>" . $count . "</td>
                   <td>" . htmlspecialchars($row['Практика']) . "\n" . htmlspecialchars($row["Группа"]) . "</td>
                   <td>" . htmlspecialchars($row['Количество']) . "</td>
@@ -118,7 +123,7 @@ echo "</tbody></table>";
                 <div class="actions">
                     <button class="action-btn edit">Изменить дату</button>
                     <button class="action-btn add" onclick="window.location.href='./planning-collDet.php?id=<?php echo $id; ?>'">Добавить группу</button>
-                    <button class="action-btn edit">Изменить для группы</button>
+                    <button class="action-btn edit" onclick="editGroup(<?php print($id) ?>)">Изменить для группы</button>
                     <button class="action-btn delete" onclick="deleteGroup()">Удалить группу из договора</button>
                 </div>
                 <div class="record-count">Записей: <?php print($row_cnt) ?></div>
@@ -127,8 +132,8 @@ echo "</tbody></table>";
     </div>
     <?php include dirname(__DIR__, 2) . '/includes/footer.php'; ?>
 
-    <script>
-    function deleteGroup() {
+<script>
+function deleteGroup() {
     // Находим выбранную радиокнопку
     const selectedRadio = document.querySelector('input[name="selected_group"]:checked');
 
@@ -153,6 +158,43 @@ echo "</tbody></table>";
         console.log('Удаление отменено пользователем');
     }
 }
+
+function editGroup( id) {
+    // Находим выбранную радиокнопку
+    const selectedRadio = document.querySelector('input[name="selected_group"]:checked');
+    const contractcode = id
+
+    if (!selectedRadio) {
+        alert('Пожалуйста, сначала выберите группу для редактирования!');
+        return false;
+    }
+
+    const groupId = parseInt(selectedRadio.value);
+    console.log('Выбран ID для редактирования:', groupId);
+
+    // Проверка валидности ID
+    if (isNaN(groupId) || groupId <= 0) {
+        alert('Ошибка: некорректный ID группы');
+        return false;
+    }
+
+    // Получаем строку таблицы, содержащую выбранные данные
+    const row = selectedRadio.closest('tr');
+
+    // Извлекаем код практики из скрытого поля
+    const practiceCode = row.querySelector('input[name="practice_code"]').value;
+
+    // Остальные данные извлекаем из видимых ячеек
+    const group = row.querySelector('td:nth-child(3)').textContent.split('\n')[1];
+    const quantity = row.querySelector('td:nth-child(4)').textContent;
+
+    // Формируем URL с параметрами (передаём код практики)
+    const url = `update_collDetForm.php?contract_id=${parseInt(contractcode)}&groupId=${encodeURIComponent(groupId)}&practice_code=${encodeURIComponent(practiceCode)}&group=${encodeURIComponent(group)}&quantity=${encodeURIComponent(quantity)}`;
+
+    // Переходим на страницу редактирования
+    window.location.href = url;
+}
+
 </script>
 </body>
 </html>
