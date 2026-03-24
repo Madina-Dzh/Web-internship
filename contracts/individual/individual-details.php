@@ -46,6 +46,11 @@ $row_cnt = $details ? $details->num_rows : 0;
 require_once dirname(__DIR__, 2) . '/includes/config.php';
 ?>
 
+<?php
+$message = isset($_GET['message']) ? htmlspecialchars($_GET['message']) : '';
+$messageType = isset($_GET['type']) ? htmlspecialchars($_GET['type']) : '';
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -109,9 +114,9 @@ echo "</tbody></table>";
             <div class="table-footer">
                 <div class="actions">
                     <button class="action-btn edit">Изменить дату</button>
-                    <button class="action-btn add">Добавить группу</button>
-                    <button class="action-btn edit">Изменить для группы</button>
-                    <button class="action-btn delete">Удалить группу из договора</button>
+                    <button class="action-btn add" onclick="window.location.href='./planning-indDet.php?id=<?php echo $id; ?>'">Добавить студента</button>
+                    <button class="action-btn edit">Изменить для студента</button>
+                    <button class="action-btn delete">Удалить студента из договора</button>
                 </div>
                 <div class="record-count">Записей: <?php print($row_cnt) ?></div>
             </div>
