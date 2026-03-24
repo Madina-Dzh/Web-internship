@@ -15,6 +15,9 @@ WHERE 1
 ORDER BY FIO";
 $teachers = $mysql->query($query);
 
+$query = "SELECT `Shifr_gr` FROM `group` WHERE 1";
+$groups = $mysql->query($query);
+
 require_once '../includes/config.php';
 ?>
 
@@ -51,11 +54,18 @@ require_once '../includes/config.php';
                 <form class="practice-form"  id="practiceForm" action="add_practice.php" method="POST">
                     <h2>Добавление новой практики</h2>
 
-                    <div class="form-group">
-                <label for="practice_code">Номер практики:</label>
-                <input type="text" id="practice_code" name="practice_code" required>
+            <!-- Форма добавления практики -->
+            <div class="form-group">
+                <label for="Shifr_gr">Группа:</label>
+                <select id="Shifr_gr" name="Shifr_gr" required>
+                    <option value="">Выберите группу</option> 
+                    <?php 
+                        while ($row = mysqli_fetch_array($groups)) {
+                            print("<option value='" . $row['Shifr_gr'] . "'>" . $row['Shifr_gr'] . "</option>");
+                        }
+                    ?>
+                </select>
             </div>
-
             <div class="form-group">
                 <label for="subject_code">Предмет:</label>
                 <select id="subject_code" name="subject_code" required>
