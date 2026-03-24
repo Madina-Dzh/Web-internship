@@ -7,7 +7,9 @@ $id = isset($_GET['id']) ? $_GET['id'] : '';
 $selectedGroup = isset($_GET['group']) ? $_GET['group'] : ''; // Получаем выбранную группу из URL
 
 
-$query = "SELECT `Shifr_gr` FROM `group` WHERE 1";
+$query = "SELECT P.Shifr_gr
+FROM `practice` P INNER JOIN `group` G ON G.Shifr_gr = P.Shifr_gr
+WHERE 1";
 $groups = $mysql->query($query);
 
 require_once dirname(__DIR__, 2) . '/includes/config.php';

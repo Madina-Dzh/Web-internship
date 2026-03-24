@@ -54,7 +54,7 @@ require_once dirname(__DIR__, 2) . '/includes/config.php';
 
         <main class="main-wrapper">
             <div class="form-container">
-                <form class="practice-form" id="practiceForm" action="add-indDet.php" method="POST">
+                <form class="practice-form" id="practiceForm" action="add_indDet.php" method="POST">
                     <input type="hidden" name="id" value="<?php echo htmlspecialchars($id ?? ''); ?>">
             <input type="hidden" name="group" value="<?php echo htmlspecialchars($group ?? ''); ?>">
 
@@ -94,7 +94,7 @@ require_once dirname(__DIR__, 2) . '/includes/config.php';
             <?php
                 if ($students->num_rows > 0) {
             while ($row = $students->fetch_assoc()) {
-                echo '<option value="' . htmlspecialchars($row['Nom_stud'] ?? '') . '">'
+                echo '<option value="' . htmlspecialchars($row['FIO'] ?? '') . '">'
              . htmlspecialchars($row['FIO'] ?? '') . '</option>';
             }
         } else {
