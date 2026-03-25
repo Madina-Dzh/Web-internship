@@ -8,8 +8,8 @@ $mysql->query("SET NAMES 'utf8'");
 $errors = [];
 
 // Проверка обязательных полей
-if (empty($_POST['Shifr_gr'])) {
-    $errors[] = "Группа обязательна";
+if (empty($_POST['Shifr_spec'])) {
+    $errors[] = "Специальность обязательна";
 }
 if (empty($_POST['subject_code'])) {
     $errors[] = "Предмет обязателен";
@@ -45,7 +45,7 @@ if (!empty($errors)) {
 }
 
 // Безопасное получение данных
-$Shifr_gr = $mysql->real_escape_string($_POST['Shifr_gr']);
+$Shifr_spec = $mysql->real_escape_string($_POST['Shifr_spec']);
 $subject_code = intval($_POST['subject_code']);
 $teacher = $mysql->real_escape_string($_POST['teacher']);
 $start_date = $mysql->real_escape_string($_POST['start_date']);
@@ -53,8 +53,8 @@ $end_date = $mysql->real_escape_string($_POST['end_date']);
 
 // Формируем SQL‑запрос с правильным порядком полей и кавычками
 $query = "INSERT INTO `practice`
-          (`Shifr_gr`, `subject_code`, `teacher`, `start_date`, `end_date`)
-          VALUES ('$Shifr_gr', '$subject_code', '$teacher', '$start_date', '$end_date')";
+          (`Shifr_spec`, `subject_code`, `teacher`, `start_date`, `end_date`)
+          VALUES ('$Shifr_spec', '$subject_code', '$teacher', '$start_date', '$end_date')";
 
 // Отладочный вывод — раскомментируйте для проверки
 

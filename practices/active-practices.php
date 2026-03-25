@@ -2,9 +2,9 @@
     $mysql = new mysqli("localhost", "root", "", "internship");
     $mysql->query("SET NAMES 'utf8'");
 
-    $query = "SELECT P.practice_code AS Номер, S.code AS Код_предмета, S.title AS Предмет, P.start_date AS Дата_начала, P.end_date AS Дата_конца, T.FIO AS Преподаватель, P.Shifr_gr AS Группа
-    FROM Practice P INNER JOIN Teacher T ON P.teacher = T.Tab_nom INNER JOIN subjects_in_cycle S ON S.id = P.subject_code
-    WHERE Date(P.end_date) > CURDATE()";
+    $query = "SELECT P.practice_code AS Номер, S.code AS Код_предмета, S.title AS Предмет, P.start_date AS Дата_начала, P.end_date AS Дата_конца, T.FIO AS Преподаватель, P.Shifr_spec AS Код_специальности, C.Sokrashenie AS Сокращение_специальности
+FROM Practice P INNER JOIN Teacher T ON P.teacher = T.Tab_nom INNER JOIN subjects_in_cycle S ON S.id = P.subject_code INNER JOIN speciality C ON C.Shifr_spec = P.Shifr_spec
+WHERE Date(P.end_date) > CURDATE()";
     $activePractices = $mysql->query($query);
     $row_cnt = $activePractices->num_rows;
 
@@ -57,8 +57,7 @@
             <div class="table-wrapper" style="height: 380px;">
                 <?php
                     echo "<table class='contracts-table'><thead><tr>
-                            <th>Номер</th>
-                            <th>Группа</th>
+                            <th>Специальность</th>
                             <th>Код_предмета</th>
                             <th>Предмет</th>
                             <th>Дата_начала</th>
@@ -66,7 +65,7 @@
                             <th>Преподаватель</th>
                         </tr></thead>";
                     while ($row = mysqli_fetch_array($activePractices)) {
-                        print("<tr data-id='" . $row['Номер'] . "'><td>" . $row['Номер'] . "</td><td> " . $row['Группа'] . "</td><td> " . $row['Код_предмета'] . "</td><td>" . $row['Предмет'] . "</td><td> " . date('d.m.Y', strtotime($row['Дата_начала']))  . "</td><td> " . date('d.m.Y', strtotime($row['Дата_конца']))  . "</td>
+                        print("<tr data-id='" . $row['Номер'] . "'><td> " . $row['Код_специальности'] . " - " . $row['Сокращение_специальности'] . "</td><td> " . $row['Код_предмета'] . "</td><td>" . $row['Предмет'] . "</td><td> " . date('d.m.Y', strtotime($row['Дата_начала']))  . "</td><td> " . date('d.m.Y', strtotime($row['Дата_конца']))  . "</td>
                             <td>" . $row['Преподаватель'] . "</td>");
                     }
                     echo "</table>"
