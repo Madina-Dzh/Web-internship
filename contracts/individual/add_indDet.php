@@ -9,26 +9,27 @@ $mysql->query("SET NAMES 'utf8'");
 $id = isset($_POST['id']) ? $_POST['id'] : null;
 $practice_code = isset($_POST['practice_code']) ? $_POST['practice_code'] : null;
 $student = isset($_POST['student']) ? $_POST['student'] : null;
-$group = isset($_POST['group']) ? $_POST['group'] : null;
+$Shifr_spec = isset($_POST['Shifr_spec']) ? $_POST['Shifr_spec'] : null;
 
 // Выводим значения переменных (просто текст, без оформления)
 echo "id: " . $id . "\n";
 echo "practice_code: " . $practice_code . "\n";
 echo "student: " . $student . "\n";
-echo "group: " . $group . "\n";
+echo "Shifr_spec: " . $Shifr_spec . "\n";
 
 // Экранируем данные для защиты от SQL‑инъекций
 $id_safe = $mysql->real_escape_string($id);
 $practice_code_safe = $mysql->real_escape_string($practice_code);
 $student_safe = $mysql->real_escape_string($student);
-$group_safe = $mysql->real_escape_string($group);
+$Shifr_spec_safe = $mysql->real_escape_string($Shifr_spec);
 
 // Формируем запрос с экранированными данными
 $query = "INSERT INTO `contract_details`
-        (`contract_code`, `practice_code`, `shifr_gr`, `fio`)
-VALUES ('$id_safe', '$practice_code_safe', '$group_safe', '$student_safe')";
+        (`contract_code`, `practice_code`, `Shifr_spec`, `fio`)
+VALUES ('$id_safe', '$practice_code_safe', '$Shifr_spec_safe', '$student_safe')";
 
 echo "\n\nВыполняемый запрос:\n$query";
+
 
 // Выполняем запрос и проверяем результат
 if ($mysql->query($query)) {

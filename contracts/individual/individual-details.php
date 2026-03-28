@@ -32,14 +32,14 @@ if (!empty($endDate) && $endDate >= date('Y-m-d')) {
 }
 
 // Для таблицы — теперь безопасно, даже если деталей нет
-$query = "SELECT d.id AS Номер, c.Shifr_spec AS Шифр_спец, C.Nazvanie AS Специальность, C.Sokrashenie AS Сокр_спец, s.title AS Практика, d.shifr_gr AS Группа, d.fio AS ФИО, p.start_date AS Дата_начала, p.end_date AS Дата_конца, R.contract_code AS Договор
+$query = "SELECT d.id AS Номер, d.Shifr_spec AS Шифр_спец, C.Sokrashenie AS Специальность, G.Shifr_gr, C.Sokrashenie AS Сокр_спец, s.title AS Практика, d.fio AS ФИО, p.start_date AS Дата_начала, p.end_date AS Дата_конца, R.contract_code AS Договор
 FROM contract_details D
 INNER JOIN contract R ON R.contract_code = D.contract_code
 INNER JOIN practice P ON P.practice_code = D.practice_code
 INNER JOIN subjects_in_cycle S ON S.id = P.subject_code
-INNER JOIN `group` G ON g.Shifr_gr = D.shifr_gr
-INNER JOIN speciality c ON C.Shifr_spec = G.Shifr_spec
-WHERE R.contract_code = " . $id;
+INNER JOIN speciality c ON C.Shifr_spec = d.Shifr_spec
+INNER JOIN `group` G ON G.Shifr_spec = C.Shifr_spec
+WHERE R.contract_code = " . $id . " group BY Номер";
 $details = $mysql->query($query);
 $row_cnt = $details ? $details->num_rows : 0;
 
@@ -92,7 +92,7 @@ if ($details && $row_cnt > 0) {
         print("<tr data-id='" . htmlspecialchars($row['Номер']) . "'>
                   <td class='radio'><input type='radio' name='details'></td>
                   <td>" . $count . "</td>
-                  <td>" . htmlspecialchars($row['Практика']) . "\n" . htmlspecialchars($row["Группа"]) . "</td>
+                  <td>" . htmlspecialchars($row['Практика']) . "\n" . htmlspecialchars($row["Специальность"]) . "</td>
                   <td>" . htmlspecialchars($row['ФИО']) . "</td>
                   <td>c " . date('d.m.Y', strtotime($row['Дата_начала'])) . " по " . date('d.m.Y', strtotime($row['Дата_конца'])) . "</td>
               </tr>");

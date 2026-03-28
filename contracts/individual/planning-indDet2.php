@@ -1,8 +1,4 @@
 <?php
-error_reporting(E_ALL);
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-
 header('Content-Type: text/html; charset=utf-8');
 $mysql = new mysqli("localhost", "root", "", "internship");
 
@@ -14,26 +10,22 @@ if ($mysql->connect_error) {
 $mysql->query("SET NAMES 'utf8'");
 
 $id = isset($_POST['id']) ? $_POST['id'] : null;
-$group = isset($_POST['group']) ? $_POST['group'] : null;
+$Shifr_spec = isset($_POST['Shifr_spec']) ? $_POST['Shifr_spec'] : null;
 
 // Практики
-$query = "SELECT P.practice_code, S.code, P.Shifr_gr
+$query = "SELECT P.practice_code, S.code, P.Shifr_spec AS шифр_специальности, C.Sokrashenie
           FROM practice P
           INNER JOIN subjects_in_cycle S ON S.id = P.subject_code
-          WHERE P.Shifr_gr = ?";
-$stmt = $mysql->prepare($query);
-$stmt->bind_param("s", $group);
-$stmt->execute();
-$practices = $stmt->get_result();
+          INNER JOIN speciality C ON C.Shifr_spec = P.Shifr_spec
+WHERE P.Shifr_spec = '$Shifr_spec'";
+$practices = $mysql->query($query);
 
 // Студенты
-$query = "SELECT Nom_stud, FIO, Shifr_gr
-          FROM student
-          WHERE Shifr_gr = ?";
-$stmt = $mysql->prepare($query);
-$stmt->bind_param("s", $group);
-$stmt->execute();
-$students = $stmt->get_result();
+$query = "SELECT S.Nom_stud, S.FIO, S.Shifr_gr
+          FROM student S INNER JOIN `group` g ON g.Shifr_gr = s.Shifr_gr
+          WHERE G.Shifr_spec = '$Shifr_spec'
+          ORDER BY Shifr_gr, S.FIO";
+$students = $mysql->query($query);
 
 require_once dirname(__DIR__, 2) . '/includes/config.php';
 ?>
@@ -56,13 +48,13 @@ require_once dirname(__DIR__, 2) . '/includes/config.php';
             <div class="form-container">
                 <form class="practice-form" id="practiceForm" action="add_indDet.php" method="POST">
                     <input type="hidden" name="id" value="<?php echo htmlspecialchars($id ?? ''); ?>">
-            <input type="hidden" name="group" value="<?php echo htmlspecialchars($group ?? ''); ?>">
+            <input type="hidden" name="Shifr_spec" value="<?php echo $Shifr_spec; ?>">
 
             <h2>Добавление студента в договор для <?php echo htmlspecialchars($id ?? ''); ?></h2>
 
             <!-- Кнопка «Назад» -->
             <div class="form-actions">
-                <a href="planning-indDet.php?id=<?php echo urlencode($id ?? ''); ?>&group=<?php echo urlencode($group ?? ''); ?>"
+                <a href="planning-indDet.php?id=<?php echo urlencode($id ?? ''); ?>&Shifr_spec=<?php echo urlencode($Shifr_spec ?? ''); ?>"
                    >
                     ← Назад к выбору группы
                 </a>
@@ -95,7 +87,7 @@ require_once dirname(__DIR__, 2) . '/includes/config.php';
                 if ($students->num_rows > 0) {
             while ($row = $students->fetch_assoc()) {
                 echo '<option value="' . htmlspecialchars($row['FIO'] ?? '') . '">'
-             . htmlspecialchars($row['FIO'] ?? '') . '</option>';
+             . htmlspecialchars($row['Shifr_gr'] ?? '') . " - " . htmlspecialchars($row['FIO'] ?? '') . '</option>';
             }
         } else {
             echo '<option value="" disabled>В группе нет студентов</option>';
