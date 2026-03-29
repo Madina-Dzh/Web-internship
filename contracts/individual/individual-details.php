@@ -90,7 +90,7 @@ if ($details && $row_cnt > 0) {
     $count = 1;
     while ($row = mysqli_fetch_array($details)) {
         print("<tr data-id='" . htmlspecialchars($row['Номер']) . "'>
-                  <td class='radio'><input type='radio' name='details'></td>
+                  <td class='radio'><input type='radio' name='details' value='" . (int)$row['Номер'] . "'></td>
                   <td>" . $count . "</td>
                   <td>" . htmlspecialchars($row['Практика']) . "\n" . htmlspecialchars($row["Специальность"]) . "</td>
                   <td>" . htmlspecialchars($row['ФИО']) . "</td>
@@ -113,15 +113,41 @@ echo "</tbody></table>";
             <!-- Футер таблицы с кнопками и счётчиком -->
             <div class="table-footer">
                 <div class="actions">
-                    <button class="action-btn edit">Изменить дату</button>
+                    <button class="action-btn edit" onclick="window.location.href='./updateDate.php?id=<?php echo $id; ?>'">Изменить дату</button>
                     <button class="action-btn add" onclick="window.location.href='./planning-indDet.php?id=<?php echo $id; ?>'">Добавить студента</button>
-                    <button class="action-btn edit">Изменить для студента</button>
-                    <button class="action-btn delete">Удалить студента из договора</button>
+                    <button class="action-btn delete" onclick="deleteStud()">Удалить студента из договора</button>
                 </div>
                 <div class="record-count">Записей: <?php print($row_cnt) ?></div>
             </div>
         </div>
     </div>
       <?php include dirname(__DIR__, 2) . '/includes/footer.php'; ?>
+
+      <script>
+        function deleteStud() {
+    // Находим выбранную радиокнопку
+    const selectedRadio = document.querySelector('input[name="details"]:checked');
+
+    if (!selectedRadio) {
+        alert('Пожалуйста, сначала выберите группу для удаления!');
+        return false;
+    }
+    const selectesId = parseInt(selectedRadio.value);
+    console.log('Выбран ID для удаления:', selectesId);
+
+    // Проверка валидности ID
+    if (isNaN(selectesId) || selectesId <= 0) {
+        alert('Ошибка: некорректный ID группы');
+        return false;
+    }
+
+    const confirmed = confirm('Вы уверены, что хотите удалить группу с ID ' + selectesId + '?');
+    if (confirmed) {
+       window.location.href = 'dell_indDet.php?id=' + selectesId + '&contract_id=<?php echo urlencode($id)?>';
+    } else {
+        console.log('Удаление отменено пользователем');
+    }
+}
+      </script>
 </body>
 </html>

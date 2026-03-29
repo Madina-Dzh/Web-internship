@@ -90,9 +90,8 @@ echo "</table>";
             <!-- Футер таблицы с кнопками и счётчиком -->
             <div class="table-footer">
                 <div class="actions">
-                    <button class="action-btn delete">Удалить договор</button>
                     <a href="./planning-contract.php"><button class="action-btn add">Добавить договор с организацией</button></a>
-                    <button class="action-btn edit">Изменить договор</button>
+                    <button class="action-btn edit">Изменить дату начала</button>
                 </div>
                 <div class="record-count">Записей: <?php print($row_cnt) ?></div>
             </div>

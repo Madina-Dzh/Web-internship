@@ -31,8 +31,8 @@ if ($endDate >= date('Y-m-d')) {
 }
 
 // Для таблицы
-$query = "SELECT d.id AS Номер, c.Shifr_spec AS Шифр_спец, C.Nazvanie AS Специальность, C.Sokrashenie AS Сокр_спец, s.title AS Практика, d.shifr_gr AS Группа, d.quantity AS Количество, p.start_date AS Дата_начала, p.end_date AS Дата_конца, R.contract_code AS Договор, P.practice_code AS код_практики
-FROM contract_details D INNER JOIN contract R ON R.contract_code=D.contract_code INNER JOIN practice P ON P.practice_code = D.practice_code INNER JOIN subjects_in_cycle S ON S.id = P.subject_code INNER JOIN `group` G ON g.Shifr_gr = D.shifr_gr INNER JOIN speciality c ON C.Shifr_spec = G.Shifr_spec
+$query = "SELECT d.id AS Номер, d.Shifr_spec AS Шифр_спец, C.Nazvanie AS Специальность, C.Sokrashenie AS Сокр_спец, s.title AS Практика, g.shifr_gr AS Группа, d.quantity AS Количество, p.start_date AS Дата_начала, p.end_date AS Дата_конца, R.contract_code AS Договор, P.practice_code AS код_практики
+FROM contract_details D INNER JOIN speciality C ON c.Shifr_spec=d.Shifr_spec INNER JOIN practice P ON P.practice_code = d.practice_code INNER JOIN subjects_in_cycle S ON S.id = P.subject_code INNER JOIN contract R ON R.contract_code = D.contract_code INNER JOIN `group` G ON G.Shifr_spec = C.Shifr_spec 
 WHERE R.contract_code = " . $id;
 $details = $mysql->query($query);
 $row_cnt = $details->num_rows;
