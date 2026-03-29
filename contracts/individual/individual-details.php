@@ -2,6 +2,10 @@
 $mysql = new mysqli("localhost", "root", "", "internship");
 $mysql->query("SET NAMES 'utf8'");
 
+$message = isset($_GET['message']) ? htmlspecialchars($_GET['message']) : '';
+$messageType = isset($_GET['type']) ? htmlspecialchars($_GET['type']) : '';
+
+
 // Получаем параметр 'id' из URL
 $id = isset($_GET['id']) ? $_GET['id'] : '';
 
@@ -70,6 +74,13 @@ $messageType = isset($_GET['type']) ? htmlspecialchars($_GET['type']) : '';
                 <span class="info-item start-date">Начало: <?php if (!empty($startDate)) print(date('d.m.Y', strtotime($startDate))); ?></span>
                 <span class="info-item status status-<?php print(strtolower($status)) ?>">Статус: <?php print($status) ?></span>
             </div>
+
+            
+<?php if ($message): ?>
+    <div class="<?php echo ($messageType == 'success' ? 'success-message' : 'error-message'); ?>">
+        <?php echo $message; ?>
+    </div>
+<?php endif; ?>
 
             <!-- Таблица договоров -->
             <div class="table-wrapper">
