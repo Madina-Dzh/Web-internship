@@ -58,16 +58,6 @@ $messageType = isset($_GET['type']) ? htmlspecialchars($_GET['type']) : '';
     <div class="container">
         <?php include dirname(__DIR__, 2) . '/includes/aside.php'; ?>
         <div class="main-wrapper">
-            
-            <?php if ($message): ?>
-                <div style="padding: 10px; margin: 15px 0; border-radius: 4px; <?php
-                    echo $messageType === 'success' ?
-                        'background-color: #d4edda; color: #155724; border: 1px solid #c3e6cb;' :
-                        'background-color: #f8d7da; color: #721c24; border: 1px solid #f5c6cb;';
-                ?>">
-                    <?php echo $message; ?>
-                </div>
-            <?php endif; ?>
 
             <div class="info-compact">
                 <span class="info-item contract-num">Договор № <?php print(str_pad($id, 3, '0', STR_PAD_LEFT)) ?></span>
@@ -75,6 +65,12 @@ $messageType = isset($_GET['type']) ? htmlspecialchars($_GET['type']) : '';
                 <span class="info-item start-date">Начало: <?php print(date( 'd.m.Y', strtotime($startDAte))) ?></span>
                 <span class="info-item status status-<?php print(strtolower($status)) ?>">Статус: <?php print($status) ?></span>
             </div>
+
+            <?php if ($message): ?>
+    <div class="<?php echo ($messageType == 'success' ? 'success-message' : 'error-message'); ?>">
+        <?php echo $message; ?>
+    </div>
+<?php endif; ?>
 
             <!-- Таблица договоров -->
             <div class="table-wrapper">
@@ -121,9 +117,8 @@ echo "</tbody></table>";
             <!-- Футер таблицы с кнопками и счётчиком -->
             <div class="table-footer">
                 <div class="actions">
-                    <button class="action-btn edit">Изменить дату</button>
+                    <button class="action-btn edit" onclick="window.location.href='./updateDate.php?id=<?php echo $id; ?>'">Изменить дату</button>
                     <button class="action-btn add" onclick="window.location.href='./planning-collDet.php?id=<?php echo $id; ?>'">Добавить группу</button>
-                    <button class="action-btn edit" onclick="editGroup(<?php print($id) ?>)">Изменить для группы</button>
                     <button class="action-btn delete" onclick="deleteGroup()">Удалить группу из договора</button>
                 </div>
                 <div class="record-count">Записей: <?php print($row_cnt) ?></div>
