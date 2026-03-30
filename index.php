@@ -1,3 +1,55 @@
+<?php
+$mysql = new mysqli("localhost", "root", "", "internship");
+    $mysql->query("SET NAMES 'utf8'");
+
+    $query = "SELECT * FROM `contract` WHERE status = 'active'";
+    $activeContracts = $mysql->query($query);
+    $activeContracts_cnt = $activeContracts->num_rows;
+
+    $query = "SELECT *
+FROM practice
+WHERE
+  -- Практика начинается в текущем полугодии ИЛИ
+  (start_date >= CASE
+    WHEN MONTH(CURRENT_DATE) <= 6 THEN DATE_FORMAT(CURRENT_DATE, '%Y-01-01')
+    ELSE DATE_FORMAT(CURRENT_DATE, '%Y-07-01')
+  END
+  AND start_date <= CASE
+    WHEN MONTH(CURRENT_DATE) <= 6 THEN DATE_FORMAT(CURRENT_DATE, '%Y-06-30')
+    ELSE DATE_FORMAT(CURRENT_DATE, '%Y-12-31')
+  END)
+  -- ИЛИ заканчивается в текущем полугодии
+  OR (end_date >= CASE
+    WHEN MONTH(CURRENT_DATE) <= 6 THEN DATE_FORMAT(CURRENT_DATE, '%Y-01-01')
+    ELSE DATE_FORMAT(CURRENT_DATE, '%Y-07-01')
+  END
+  AND end_date <= CASE
+    WHEN MONTH(CURRENT_DATE) <= 6 THEN DATE_FORMAT(CURRENT_DATE, '%Y-06-30')
+    ELSE DATE_FORMAT(CURRENT_DATE, '%Y-12-31')
+  END)
+  -- ИЛИ полностью охватывает текущее полугодие
+  OR (start_date < CASE
+    WHEN MONTH(CURRENT_DATE) <= 6 THEN DATE_FORMAT(CURRENT_DATE, '%Y-01-01')
+    ELSE DATE_FORMAT(CURRENT_DATE, '%Y-07-01')
+  END
+  AND end_date > CASE
+    WHEN MONTH(CURRENT_DATE) <= 6 THEN DATE_FORMAT(CURRENT_DATE, '%Y-06-30')
+    ELSE DATE_FORMAT(CURRENT_DATE, '%Y-12-31')
+  END);";
+  $actualPractice = $mysql->query($query);
+    $actualPractice_cnt = $actualPractice->num_rows;
+
+    $query = "SELECT * FROM `contract` WHERE `status`= 'draft'";
+    $draftContacts = $mysql->query($query);
+    $draftContacts_cnt = $draftContacts->num_rows;
+
+    $query = "SELECT `contract_code`, `organization_code`, `start_date`, `end_date`, `status`, `type` 
+FROM `contract`  
+WHERE `end_date`>= CURRENT_DATE()
+ORDER BY `end_date`
+LIMIT 1";
+    $upcomingIvent = $mysql->query($query);
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -19,19 +71,25 @@
                 <div class="stats-grid">
                     <div class="stat-card">
                         <h3>Активных договоров</h3>
-                        <p class="stat-value">N</p>
+                        <p class="stat-value"><?php print($activeContracts_cnt) ?></p>
                     </div>
                     <div class="stat-card">
                         <h3>Практик в текущем семестре</h3>
-                        <p class="stat-value">M</p>
+                        <p class="stat-value"><?php print($actualPractice_cnt) ?></p>
                     </div>
                     <div class="stat-card">
                         <h3>Договоров без деталей</h3>
-                        <p class="stat-value">K</p>
+                        <p class="stat-value"><?php print($draftContacts_cnt) ?></p>
                     </div>
                     <div class="stat-card">
                         <h3>Ближайшее событие</h3>
-                        <p class="stat-value">Договор №001 истечёт 30.10.2026</p>
+                        <p class="stat-value">
+                            <?php
+                                while ($row = mysqli_fetch_array($upcomingIvent)) {
+                                    print("Договор № " . str_pad($row['contract_code'], 3, '0', STR_PAD_LEFT) . " истечёт " . date('d.m.Y', strtotime($row['end_date'])));
+                                }
+                            ?>
+                        </p>
                     </div>
                 </div>
 
