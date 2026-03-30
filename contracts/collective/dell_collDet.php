@@ -21,6 +21,21 @@ if ($groupId > 0) {
     }
 }
 
+// Проверяем, есть ли записи с данным contract_code в таблице contract
+$checkQuery = "SELECT 1 FROM `contract`
+              WHERE contract_code = '$contractId'
+              LIMIT 1";
+$result = $mysql->query($checkQuery);
+
+if ($result->num_rows > 0) {
+    echo("Записей нет - в черновики");
+    $updateQuery = "UPDATE `contract`
+                  SET `status` = 'draft'
+                  WHERE contract_code = '$contractId'";
+    $mysql->query($updateQuery);
+}
+
+
 $mysql->close();
 
 $redirectUrl = 'collective-details.php?id=' . $contractId . '&message=' . urlencode($message) . '&type=' . $messageType;

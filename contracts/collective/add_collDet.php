@@ -41,6 +41,36 @@ $query = "INSERT INTO `contract_details`
         (`contract_code`, `practice_code`, `shifr_gr`, `quantity`, `Shifr_spec`)
         VALUES ('$id_safe', '$practice_code_safe', '$group_safe', '$quantity_safe', '$shifr_spec_safe')";
 
+// Проверяем статус контракта через JOIN с корректным условием
+$checkQuery = "SELECT C.contract_code
+              FROM contract_details C INNER JOIN practice P ON P.practice_code = C.practice_code
+              WHERE P.end_date > CURRENT_DATE()
+              AND C.contract_code = $id_safe
+              LIMIT 1";
+
+$result = $mysql->query($checkQuery);
+if (!$result) {
+    die("Ошибка SELECT: " . $mysql->error);
+}
+
+if ($result->num_rows > 0) {
+    echo "Дата поздняя — активно\n";
+    $updateQuery = "UPDATE `contract`
+                  SET `status` = 'active'
+                  WHERE contract_code = '$id_safe'";
+    if (!$mysql->query($updateQuery)) {
+        die("Ошибка UPDATE (active): " . $mysql->error);
+    }
+} else {
+    echo "Дата неудачна — истекший\n";
+    $updateQuery = "UPDATE `contract`
+                  SET `status` = 'expired'
+                  WHERE contract_code = '$id_safe'";
+    if (!$mysql->query($updateQuery)) {
+        die("Ошибка UPDATE (expired): " . $mysql->error);
+    }
+}
+
 if ($mysql->query($query)) {
     header("Location: collective-details.php?id=$id"); // Используем Location вместо Refresh
     exit;

@@ -35,7 +35,7 @@ if (!$mysql->query($query)) {
 // Проверяем статус контракта через JOIN с корректным условием
 $checkQuery = "SELECT C.contract_code
               FROM contract_details C INNER JOIN practice P ON P.practice_code = C.practice_code
-              WHERE P.end_date <= CURRENT_DATE()
+              WHERE P.end_date > CURRENT_DATE()
               AND C.contract_code = $id_safe
               LIMIT 1";
 
