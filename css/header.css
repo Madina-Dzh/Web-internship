@@ -1,3 +1,7 @@
+* {
+    font-family: PT Sans, Arial, Roboto;
+}
+
 .main-header {
     display: flex;
     justify-content: space-between;
