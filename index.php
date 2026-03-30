@@ -49,6 +49,8 @@ WHERE `end_date`>= CURRENT_DATE()
 ORDER BY `end_date`
 LIMIT 1";
     $upcomingIvent = $mysql->query($query);
+
+    require_once dirname(__DIR__) . '/test/includes/config.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -105,9 +107,9 @@ LIMIT 1";
                 </div>
 
                 <div class="quick-actions">
-                    <button class="btn btn-primary">Создать новый договор</button>
-                    <button class="btn btn-secondary">Запланировать практику</button>
-                    <button class="btn btn-outline">Проверить справочники</button>
+                    <a href="<?php echo(CONTRACTS_URL) ?>planning-contract.php"><button class="btn btn-primary" >Создать новый договор</button></a>
+                    <a href="<?php echo(PRACTICES_URL) ?>planning-practices.php"><button class="btn btn-secondary">Запланировать практику</button></a>
+                    <a href="<?php echo(REFERENCES_URL) ?>organizations.php"><button class="btn btn-outline">Проверить справочники</button></a>
                 </div>
             </div>
         </div>

@@ -41,7 +41,7 @@
             </div>-->
 
             <!-- Таблица договоров -->
-            <div class="table-wrapper" style="height: 380px;">
+            <div class="table-wrapper" style="height: 480px;">
                 <?php 
                 echo "<table class='contracts-table'><tr><th>Шифр</th><th>Название</th><th>Сокращение</th><th>Срок_обучение</th></tr>";
                 while ($row = mysqli_fetch_array($resSpec)) {

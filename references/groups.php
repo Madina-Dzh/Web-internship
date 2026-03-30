@@ -41,7 +41,7 @@ FROM `group` G LEFT JOIN teacher T ON G.Tab_nom = T.Tab_nom";
                 <input type="text" id="subject-filter" placeholder="Есть/Нет">
             </div>-->
 
-            <div class="table-wrapper" style="height: 380px;">
+            <div class="table-wrapper" style="height: 480px;">
                 <?php 
                 echo "<table class='contracts-table'><tr><th>Группа</th><th>Специальность</th><th>Год_поступления</th><th>Год_окончания</th><th>Куратор</th><th>Количество_студентов</th></tr>";
                 while ($row = mysqli_fetch_array($resGroup)) {
