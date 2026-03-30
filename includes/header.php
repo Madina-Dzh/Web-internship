@@ -13,7 +13,7 @@ require_once dirname(__DIR__) . '/includes/config.php';
 <body>
     <header class="main-header">
         <div class="logo">
-            <span class="logo-text">ПрактДог</span>
+            <span class="logo-text">ПрактиДог</span>
         </div>
         <nav class="main-nav">
             <a href="<?php echo CONTRACTS_URL; ?>active-contracts.php" class="nav-link">Договоры</a>
@@ -21,7 +21,7 @@ require_once dirname(__DIR__) . '/includes/config.php';
             <a href="<?php echo REFERENCES_URL; ?>organizations.php" class="nav-link">Справочники</a>
         </nav>
         <div class="account">
-            <button class="login-btn">Войти</button>
+            <!--<button class="login-btn">Войти</button>-->
         </div>
     </header>
 </body>

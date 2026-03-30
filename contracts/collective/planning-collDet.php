@@ -38,12 +38,12 @@ require_once dirname(__DIR__, 2) . '/includes/config.php';
                 <form class="practice-form"  id="practiceForm" action="add_collDet.php" method="POST">
                     <input type="hidden" name="id" value="<?php echo htmlspecialchars($id); ?>">
 
-                    <h2>Добавление Группы в договор для <?php print($id) ?></h2>
+                    <h2>Добавление группы в договор № <?php print(str_pad($id, 3, '0', STR_PAD_LEFT)) ?></h2>
 
                     <div class="form-group">
                         <label for="group">Группа:</label>
                         <select id="group" name="group" required>
-                            <option value="">Выберите практику</option> 
+                            <option value="">Выберите группу</option> 
                             <?php 
                                 while ($row = mysqli_fetch_array($groups)) {
                                     print("<option value='" . $row['Shifr_gr'] . "'>" . $row['Shifr_gr'] . "</option>");

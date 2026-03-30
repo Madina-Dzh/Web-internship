@@ -36,7 +36,7 @@ require_once dirname(__DIR__, 2) . '/includes/config.php';
     <!-- ДОБАВЛЕНО: скрытое поле для передачи Shifr_spec -->
     <input type="hidden" name="Shifr_spec" value="<?php echo htmlspecialchars($selectedSpec); ?>">
 
-    <h2>Добавление студента в договор для <?php print($id) ?></h2>
+    <h2>Добавление студента в договор № <?php print(str_pad($id, 3, '0', STR_PAD_LEFT)) ?></h2>
 
     <div class="form-group">
         <label for="Shifr_spec">Специальность:</label>

@@ -32,7 +32,7 @@ WHERE Date(P.end_date) < CURDATE()";
                 <a href="./expired-practices.php" class="tab active">Архив</a>
                 <a href="./planning-practices.php" class="tab">Планирование</a>
             </div>
-            <!-- Фильтры -->
+            <!-- Фильтры 
             <div class="filter-container">
                 <label for="subject-filter">Предмет:</label>
                 <input type="text" id="subject-filter" placeholder="Введите предмет">
@@ -50,7 +50,7 @@ WHERE Date(P.end_date) < CURDATE()";
                     <label for="end-date-to">до:</label>
                     <input type="date" id="end-date-to">
                 </div>
-            </div>
+            </div>-->
 
             <!-- Таблица договоров -->
             <div class="table-wrapper" style="height: 380px;">

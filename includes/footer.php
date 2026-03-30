@@ -27,7 +27,7 @@ require_once dirname(__DIR__) . '/includes/config.php';
             </div>
             <div class="contact-item">
                 <span class="contact-icon">✉️</span>
-                <a href="mailto:developer@example.com" class="contact-link">developer@example.com</a>
+                <a href="mailto:developer@example.com" class="contact-link">madinadzhanaeva670@gmail.com</a>
             </div>
         </div>
 
@@ -40,8 +40,8 @@ require_once dirname(__DIR__) . '/includes/config.php';
         </div>
 
         <div class="footer-section footer-copyright">
-            <p class="footer-text">&copy; 2024 ПрактДог. Все права защищены.</p>
-            <p class="footer-text">Система договорных практик для методистов</p>
+            <p class="footer-text">&copy; 2026 ПрактиДог. Все права защищены.</p>
+            <p class="footer-text">Онлайн платформа управления договорами производственной практики студентов факультета среднего профессионального образования</p>
         </div>
     </div>
 </footer>

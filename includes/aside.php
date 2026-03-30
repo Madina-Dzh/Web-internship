@@ -52,7 +52,7 @@ require_once dirname(__DIR__) . '/includes/config.php';
     </ul>
   </nav>
 
-  <button class="add-btn">Добавить</button>
+  <!--<button class="add-btn">Добавить</button>-->
 </aside>
 </body>
 </html>

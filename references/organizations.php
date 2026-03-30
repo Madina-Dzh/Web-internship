@@ -31,7 +31,7 @@
                 <a href="<?php echo REFERENCES_URL; ?>specialities.php" class="tab">Специальности</a>
             </div>
 
-            <!-- Фильтры -->
+            <!-- Фильтры
             <div class="filter-container">
                 <label for="subject-filter">Группа:</label>
                 <input type="text" id="subject-filter" placeholder="Введите группу">
@@ -41,7 +41,7 @@
 
                 <label for="subject-filter">Куратор:</label>
                 <input type="text" id="subject-filter" placeholder="Введите ФИО">
-            </div>
+            </div> -->
 
             <!-- Таблица договоров -->
             <div class="table-wrapper" style="height: 380px;">

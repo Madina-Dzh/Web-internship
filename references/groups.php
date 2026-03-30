@@ -32,14 +32,14 @@ FROM `group` G LEFT JOIN teacher T ON G.Tab_nom = T.Tab_nom";
                 <a href="<?php echo REFERENCES_URL; ?>specialities.php" class="tab">Специальности</a>
             </div>
 
-            <!-- Фильтры -->
+            <!-- Фильтры 
             <div class="filter-container">
                 <label for="subject-filter">Название:</label>
                 <input type="text" id="subject-filter" placeholder="Введите название">
 
                 <label for="subject-filter">Договор:</label>
                 <input type="text" id="subject-filter" placeholder="Есть/Нет">
-            </div>
+            </div>-->
 
             <div class="table-wrapper" style="height: 380px;">
                 <?php 

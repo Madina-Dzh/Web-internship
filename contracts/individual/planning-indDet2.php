@@ -50,7 +50,7 @@ require_once dirname(__DIR__, 2) . '/includes/config.php';
                     <input type="hidden" name="id" value="<?php echo htmlspecialchars($id ?? ''); ?>">
             <input type="hidden" name="Shifr_spec" value="<?php echo $Shifr_spec; ?>">
 
-            <h2>Добавление студента в договор для <?php echo htmlspecialchars($id ?? ''); ?></h2>
+            <h2>Добавление студента в договор № <?php print(str_pad($id, 3, '0', STR_PAD_LEFT)) ?></h2>
 
             <!-- Кнопка «Назад» -->
             <div class="form-actions">

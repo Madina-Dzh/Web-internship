@@ -31,14 +31,14 @@
                 <a href="<?php echo REFERENCES_URL; ?>specialities.php" class="tab active">Специальности</a>
             </div>
 
-            <!-- Фильтры -->
+            <!-- Фильтры 
             <div class="filter-container">
                 <label for="subject-filter">Шифр:</label>
                 <input type="text" id="subject-filter" placeholder="Введите шифр">
 
                 <label for="subject-filter">Сокращение:</label>
                 <input type="text" id="subject-filter" placeholder="Введите Сокращение">
-            </div>
+            </div>-->
 
             <!-- Таблица договоров -->
             <div class="table-wrapper" style="height: 380px;">
