@@ -89,7 +89,6 @@ echo "</table>";
             <div class="table-footer">
                 <div class="actions">
                     <a href="./planning-contract.php"><button class="action-btn add">Добавить договор с организацией</button></a>
-                    <button class="action-btn edit">Изменить дату начала</button>
                 </div>
                 <div class="record-count">Записей: <?php print($row_cnt) ?></div>
             </div>
