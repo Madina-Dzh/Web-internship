@@ -50,6 +50,8 @@ ORDER BY `end_date`
 LIMIT 1";
     $upcomingIvent = $mysql->query($query);
 
+    $actions = $mysql->query("SELECT `id`, `action_text`, `created_at` FROM `user_actions` ORDER BY `created_at` DESC LIMIT 5");
+
     require_once dirname(__DIR__) . '/test/includes/config.php';
 ?>
 <!DOCTYPE html>
@@ -98,11 +100,11 @@ LIMIT 1";
                 <div class="recent-actions">
                     <h2>Последние действия</h2>
                     <ul class="actions-list">
-                        <li>Добавлен договор №005</li>
-                        <li>Обновлено расписание практики №3</li>
-                        <li>Назначена практика</li>
-                        <li>Создан новый справочник организаций</li>
-                        <li>Обновлены данные по группе ИТ-401</li>
+                        <?php
+                                while ($row = mysqli_fetch_array($actions)) {
+                                    print("<li>" . $row['action_text'] . "</li>");
+                                }
+                            ?>
                     </ul>
                 </div>
 

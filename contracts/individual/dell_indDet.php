@@ -40,7 +40,8 @@ if ($result->num_rows > 0) {
 }
 
 print_r($result);
-
+$number = str_pad($contractId, 3, '0', STR_PAD_LEFT);
+$mysql->query("INSERT INTO `user_actions`(`action_text`) VALUES ('Удалён студент из индивидуального договора № $number')");
 $mysql->close();
 
 $redirectUrl = 'individual-details.php?id=' . $contractId . '&message=' . urlencode($message) . '&type=' . $messageType;

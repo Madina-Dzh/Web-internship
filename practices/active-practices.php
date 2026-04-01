@@ -4,7 +4,7 @@
 
     $query = "SELECT P.practice_code AS Номер, S.code AS Код_предмета, S.title AS Предмет, P.start_date AS Дата_начала, P.end_date AS Дата_конца, T.FIO AS Преподаватель, P.Shifr_spec AS Код_специальности, C.Sokrashenie AS Сокращение_специальности
 FROM Practice P INNER JOIN Teacher T ON P.teacher = T.Tab_nom INNER JOIN subjects_in_cycle S ON S.id = P.subject_code INNER JOIN speciality C ON C.Shifr_spec = P.Shifr_spec
-WHERE Date(P.end_date) > CURDATE()";
+WHERE P.end_date > CURDATE()";
     $activePractices = $mysql->query($query);
     $row_cnt = $activePractices->num_rows;
 

@@ -6,9 +6,19 @@ $mysql->query("SET NAMES 'utf8'");
 $id = isset($_GET['id']) ? $_GET['id'] : '';
 
 // практики
-$query = "SELECT `practice_code`, `subject_code`, `start_date`, `end_date`, `teacher` FROM `practice` 
+$query = "SELECT `practice_code`, `subject_code`, `start_date`, `end_date`, `teacher`, C.Sokrashenie, S.code FROM practice P
+          INNER JOIN subjects_in_cycle S ON S.id = P.subject_code
+          INNER JOIN speciality C ON C.Shifr_spec = P.Shifr_spec 
 WHERE DATE(end_date) > CURDATE()";
 $practices = $mysql->query($query);
+
+/*
+$query = "SELECT P.practice_code, P.Shifr_spec AS шифр_специальности, C.Sokrashenie
+          FROM practice P
+          INNER JOIN subjects_in_cycle S ON S.id = P.subject_code
+          INNER JOIN speciality C ON C.Shifr_spec = P.Shifr_spec
+WHERE P.Shifr_spec = '$Shifr_spec'";
+*/
 
 $query = "SELECT `Shifr_gr`
 FROM `group` WHERE 1";
@@ -58,7 +68,7 @@ require_once dirname(__DIR__, 2) . '/includes/config.php';
                             <option value="">Выберите практику</option> 
                             <?php 
                                 while ($row = mysqli_fetch_array($practices)) {
-                                    print("<option value='" . $row['practice_code'] . "'>" . $row['practice_code'] . "</option>");
+                                    print("<option value='" . $row['practice_code'] . "'>" . $row['code'] . " (" . date('d.m.Y', strtotime($row['start_date'])) . " - " . date('d.m.Y', strtotime($row['end_date'])) . ")" . "</option>");
                                 }
                             ?> 
                         </select>

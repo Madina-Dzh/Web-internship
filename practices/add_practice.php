@@ -73,5 +73,6 @@ if ($mysql->query($query)) {
     ]);
 }
 
+$mysql->query("INSERT INTO `user_actions`(`action_text`) VALUES ('Добавлена практика $subject_code')");
 $mysql->close();
 ?>

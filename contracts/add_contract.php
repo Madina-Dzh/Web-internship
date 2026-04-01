@@ -12,7 +12,7 @@ if (empty($_POST['contract_code'])) {
     $errors[] = "Номер практики обязателен";
 }
 if (empty($_POST['organization_code'])) {
-    $errors[] = "Организация обязателбна";
+    $errors[] = "Организация обязательна";
 }
 if (empty($_POST['type'])) {
     $errors[] = "Тип договора обязателен";
@@ -40,7 +40,7 @@ if (!empty($_POST['start_date']) && !empty($_POST['end_date'])) {
 
 if (!empty($errors)) {
     http_response_code(400);
-    echo json_encode(['success' => false, 'errors' => $errors]);
+    echo "errors:" . implode(", ", $errors);
     exit;
 }
 
@@ -51,26 +51,34 @@ $type = $mysql->real_escape_string($_POST['type']);
 $start_date = $mysql->real_escape_string($_POST['start_date']);
 $end_date = $mysql->real_escape_string($_POST['end_date']);
 
+// ПРОВЕРКА НА СУЩЕСТВОВАНИЕ ЗАПИСИ С ТАКИМ contract_code
+$checkQuery = "SELECT COUNT(*) as count FROM `contract` WHERE `contract_code` = '$contract_code'";
+$checkResult = $mysql->query($checkQuery);
+$row = $checkResult->fetch_assoc();
+
+if ($row['count'] > 0) {
+    http_response_code(400);
+    echo "errors:Запись с таким номером договора уже существует";
+    exit;
+}
+
 // Формируем SQL‑запрос с правильным порядком полей и кавычками
 $query = "INSERT INTO `contract`
-                (`contract_code`, `organization_code`, `start_date`, `end_date`, `status`, `type`) 
+                (`contract_code`, `organization_code`, `start_date`, `end_date`, `status`, `type`)
           VALUES ('$contract_code', '$organization_code', '$start_date', '$end_date', 'draft', '$type')";
 
-// Отладочный вывод — раскомментируйте для проверки
+$result = $mysql->query($query);
 
-echo "Debug - SQL query:\n";
-echo $query;
-//exit;
-
-
-if ($mysql->query($query)) {
-    echo json_encode(['success' => true]);
+if ($result) {
+    $number = str_pad($contract_code, 3, '0', STR_PAD_LEFT);
+    $mysql->query("INSERT INTO `user_actions`(`action_text`) VALUES ('добавлен контракт № $number')");
+    // Мгновенный редирект без вывода каких‑либо сообщений
+    header("Location: draft-contract.php");
+    exit;
 } else {
     http_response_code(500);
-    echo json_encode([
-        'success' => false,
-        'errors' => ['Ошибка при добавлении договора: ' . $mysql->error]
-    ]);
+    echo "Ошибка при добавлении в базу данных";
+    exit;
 }
 
 $mysql->close();

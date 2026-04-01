@@ -43,6 +43,8 @@ $result = $mysql->query($checkQuery);
 if (!$result) {
     die("Ошибка SELECT: " . $mysql->error);
 }
+$number = str_pad($id_safe, 3, '0', STR_PAD_LEFT);
+$mysql->query("INSERT INTO `user_actions`(`action_text`) VALUES ('добавлен студент в индивидуальный договор № $number')");
 
 if ($result->num_rows > 0) {
     echo "Дата поздняя — активно\n";

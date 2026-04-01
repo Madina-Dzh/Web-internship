@@ -35,6 +35,8 @@ if ($result->num_rows > 0) {
     $mysql->query($updateQuery);
 }
 
+$number = str_pad($contractId, 3, '0', STR_PAD_LEFT);
+$mysql->query("INSERT INTO `user_actions`(`action_text`) VALUES ('Удалена группа из коллективного договора № $number')");
 
 $mysql->close();
 

@@ -3,9 +3,9 @@ $mysql = new mysqli("localhost", "root", "", "internship");
 $mysql->query("SET NAMES 'utf8'");
 
 // Предметы
-$query = "SELECT `id`, `code`
+$query = "SELECT `id`, `code`, `title`
 FROM `subjects_in_cycle` 
-WHERE title LIKE '%практика%' OR title LIKE '%ПРАКТИКА%'";
+WHERE code LIKE 'ПП.%' OR code = 'ПДП'";
 $subjects = $mysql->query($query);
 
 // Преподаватели

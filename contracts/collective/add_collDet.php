@@ -70,7 +70,8 @@ if ($result->num_rows > 0) {
         die("Ошибка UPDATE (expired): " . $mysql->error);
     }
 }
-
+$number = str_pad($id_safe, 3, '0', STR_PAD_LEFT);
+$mysql->query("INSERT INTO `user_actions`(`action_text`) VALUES ('Добавлена группа в коллективный договор № $number')");
 if ($mysql->query($query)) {
     header("Location: collective-details.php?id=$id"); // Используем Location вместо Refresh
     exit;

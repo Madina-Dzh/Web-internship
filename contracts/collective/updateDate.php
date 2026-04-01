@@ -42,6 +42,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['sdate'])) {
 
         if ($mysql->query($updateQuery)) {
             // Успешное обновление — перенаправляем с сообщением успеха
+            $number = str_pad($id_safe, 3, '0', STR_PAD_LEFT);
+            $mysql->query("INSERT INTO `user_actions`(`action_text`) VALUES ('дата обновлена для коллективного договора № $number')");
             header("Location: collective-details.php?id=$id&message=Дата%20успешно%20обновлена&type=success");
             exit;
         } else {
